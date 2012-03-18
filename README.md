@@ -29,9 +29,3 @@ Next, you're going to want to open up `report.tex` and change the details at the
 * `rake clobber` - Remove any generated file.
 * `rake count` - Count the number of words in the document.
 
-## Contributors
-
-* Chris Brown (xoebus)
-* Alex Shearn (shearn89)
-
-Full list of procrastinators can be found [on Github](https://github.com/proa/ug4-report-template/contributors).
