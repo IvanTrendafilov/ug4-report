@@ -1,3 +1,27 @@
 \chapter{Cool Story}
 
 HOLY COW, A SECOND CHAPTER.
+1.	Advance fee fraud overview
+
+The goal of this project is to explore the feasibility of building an autonomous conversational agent to sustain a dialogue with a person perpetrating advance fee fraud over email.
+
+Advance fee fraud (AFF) emails are identical or nearly identical messages sent in bulk to a large number of recipients. They are considered to be a subset of email spam, however, unlike traditional spam messages, their purpose is not to advertise products, but to convince the recipient to advance sums of money in the hope of eventually realizing a significantly larger gain. Because of this, AFF emails can be defined at the intersection of spam and social engineering.
+
+AFF emails have another important distinction from generic spam messages. Typically, replying to a generic spam message serves no purpose to the perpetrator of the scam or the target. The headers of these messages are most often spoofed and the “From” and “Reply-To” addresses point to nonexistent email boxes. In contrast, AFF messages explicitly require the target to respond, in order to express interest in the proposed opportunity. Once the scammer receives a reply, he continues the exchange for as long as it is necessary to convince the target of the veracity of the opportunity. Then, the scammer introduces a delay or monetary hurdle that prevents the deal from happening as planned. This hurdle is set up so it can be overcome by paying a fee for some service – e.g. a bribe for a bank official, a processing fee for a transaction, legal fees, etc. If the target advances the requested fees, the scammer will proceed to introduce additional hurdles, in order to extract additional fees. At this stage, the scammer is even more likely to succeed, as the target is already emotionally invested in the deal [REF]. The exact details of these exchanges vary considerably, however a scammer would often employ a combination of deception and various other manipulation techniques [REF].
+
+The modern advance fee scam originated in Nigeria in the 1980s, as the country's oil-based economy declined and left millions of people unemployed [REF]. As a result of this, several enterprising individuals took the idea of the older Spanish Prisoner scam and extended it to various electronic means, such as fax, telex, and eventually email. The boom of email and advances in software, such as web crawlers and email address harvesters, helped significantly lower the cost of sending scam letters. Due to the low costs involved in running the scam and its proportionally high payout, the idea quickly spread to other regions of Africa, as well as parts of Europe and the United States. Due to its origin, advance fee fraud is often referred to as “419 fraud”, after article 419 of the Nigerian Criminal Code (Chapter 38: “Obtaining Property by false pretences; Cheating”) [REF].
+
+419 scams have a significant impact on the wider economy. Chatham House Research estimates that Nigerian-style advance fee fraud costs the UK economy £150 million annually and the average victim loses £31,000 [REF]. Between 2000 and 2003, the National Criminal Intelligence Service has found in London 78,000 different advance-fee-style letters, faxes, and emails [REF]. It is possible that these figures underestimate the total financial loss incurred by businesses and individuals, as victims are likely to feel ashamed or are convinced they have also done something illegal and are, therefore, less likely to report the crime to the police. Whilst this is speculation, it would help explain the relatively large reported loss per victim, as scammers typically aim to extract smaller amounts from a larger pool of victims, many of which go unreported.
+
+2.	Project rationale
+
+As we discussed earlier, a major difference between generic and advance fee spam is the active 
+
+involvement of the scammer in the former. An interesting approach to dealing with it would be to build a conversational agent to emulate a victim with the goal of maintaining an email exchange for as long as possible.
+
+The core assumption of this approach lies in the cost of human effort. It is time consuming to read and respond to emails. By introducing automatically generated email threads into a scammer's workflow, we are increasing the time he has to spend reading, replying, and monitoring the state of conversations that cannot possibly lead to a positive outcome. This helps dilute the pool of potential victims and lowers the overall utility of his actions.
+
+Another advantage of this approach is scalability. Since the proposed agent is fully autonomous, it can sustain conversations with a large number of scammers simultaneously (bounded by hardware resource limits). As we will see, the proof of concept implementation in [CHAPTER] maintained conversations with [FIGURE] over the course of a 2-week period. Further scalability can be achieved by deploying multiple instances of the agent.
+
+In this project, we will develop a fully autonomous system to gather, send and receive AFF emails.
+
