@@ -1,0 +1,46 @@
+$Greeting
+
+$Opening
+
+$PQ_answer
+
+$Question_intro
+
+$Question_body
+
+$Rule_answers
+
+$Story
+
+$Closing
+
+$Signoff
+
+$Quoted_text
+
+GROUP Letter context:
+Greeting/Placeholder
+Sing Off/Placeholder
+Quoted Text/Placeholder
+
+GROUP Body:
+Opening/Placeholder
+Question strategy/Placeholder
+Rules strategy/Placeholder
+Story strategy/Placeholder
+PQ answer strategy/Placeholder
+
+GROUP Greeting:
+Greeting-text / probability
+
+GROUP Sign off:
+Singoff-text / probability
+
+GROUP Quoted text:
+Qutoed message / 1
+
+Group Openingy:
+...
+
+
+
