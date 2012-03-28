@@ -67,20 +67,28 @@ Further to adding context, text snippets also provide variability to the generat
 
 Several layers of FSMs and PFSMs determine how each response is generated. We start by looking at the top-level FSM. We move on to a simple PFSM used for generating greetings. Finally, we illustrate the PFSMs that generate the content body.
 
-The top-level FSM defines the high-level structure of our message -- a letter. The Greeting, Body and Signature states represent a set of PFSMs, whilst Quoted\_Text simply produces a quoted version of the incoming message. The FSM is illustrated in [FIGURE].
+The top-level FSM defines the high-level structure of our message -- a letter. The Greeting, Body and Signature states represent a set of PFSMs, whilst Quoted\_Text simply produces a quoted version of the incoming message. The FSM is illustrated below.
 
-\includegraphics[scale=0.75]{fsm-top-level.png}
-%[FIGURE OF THE FSM]
+\includegraphics[scale=0.80]{fsm-top-level.png}
 
 The greeting generation automata is an example of a simple bottom-level PFSM. Its task is to accept the name of the scammer and produce a greeting, as illustrated in [FIGURE]. The transitions between the has\_name state and the text snippets have probability $p = \frac{1}{3}$.
 
-[FIGURE OF THE FSM]
+\includegraphics[scale=0.60]{pfsm-greeting.png}
 
-[FIGURE] illustrates the PFSM which generates the content body of a message. It takes in as inputs the results of classifier, information extraction and identity generation tasks. Its main purpose is to select strategies and create placeholders for lower-level PFSMs. Strategies are selected based on the available information and conversation state. Please note, for clarify of the figure, we have omitted some of the notation.
+Figure 3 (missing) illustrates the PFSM which generates the content body of a message. It takes in as inputs the results of classifier, information extraction and identity generation tasks. Its main purpose is to select strategies and create placeholders for lower-level PFSMs. Strategies are selected based on the available information and conversation state. Please note, for clarify of the figure, we have omitted some of the notation.
 
-[FIGURE1] illustrates a lower-level FSM for the lottery scam variation. The scam is modelled by four distinct states. [FIGURE2] illustrates a bottom-level PFSM for the same scam, after a transition to the initial state.
+Figure (a) illustrates a lower-level FSM for the lottery scam variation. The scam is modelled by four distinct states. Figure (b) illustrates a bottom-level PFSM for the same scam, after a transition to the initial state.
 
-[FIGURE1], [FIGURE2]
+\begin{figure}
+  \centering
+  \subfloat[Lottery FSM]{\includegraphics[scale=0.50]{rules_lottery.png}}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc. (or a blank line to force the subfig onto a new line)
+  \subfloat[Snippet FSM]{\includegraphics[scale=0.50]{pfsm_text_snippet.png}}
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc. (or a blank line to force the subfig onto a new line)
+%  \subfloat[A mouse]{\label{fig:mouse}\includegraphics[width=0.3\textwidth]{mouse}}
+ % \caption{Pictures of animals}
+ % \label{fig:animals}
+\end{figure}
 
 We follow the same approach when modelling other scam variations and conversation strategies.
 
