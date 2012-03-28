@@ -68,7 +68,9 @@ Further to adding context, text snippets also provide variability to the generat
 Several layers of FSMs and PFSMs determine how each response is generated. We start by looking at the top-level FSM. We move on to a simple PFSM used for generating greetings. Finally, we illustrate the PFSMs that generate the content body.
 
 The top-level FSM defines the high-level structure of our message -- a letter. The Greeting, Body and Signature states represent a set of PFSMs, whilst Quoted\_Text simply produces a quoted version of the incoming message. The FSM is illustrated in [FIGURE].
-[FIGURE OF THE FSM]
+
+\includegraphics[scale=0.75]{fsm-top-level.png}
+%[FIGURE OF THE FSM]
 
 The greeting generation automata is an example of a simple bottom-level PFSM. Its task is to accept the name of the scammer and produce a greeting, as illustrated in [FIGURE]. The transitions between the has\_name state and the text snippets have probability $p = \frac{1}{3}$.
 
