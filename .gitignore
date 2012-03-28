@@ -7,5 +7,4 @@
 *.bbl
 *.blg
 *.toc
-*.pdf
 !styles/**/*.pdf
