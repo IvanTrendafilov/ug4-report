@@ -1,17 +1,23 @@
-\chapter{Collectors}
-
-In this chapter we outline our system's mechanism for collecting new messages. We first set up the context and motivation of the problem. Then, we explore the implementation of our solution. Lastly, we describe three specific modules which implement the collector interface.
+\chapter{Collector}
+In this chapter we outline our system's mechanism for collecting new messages. We first set up the context and motivation of the problem. Then, we explore the implementation of our solution. Lastly, we describe three specific modules which implement the collection interface.
 
 \section{Motivation}
 
-The collectors component provides the entry point for messages into the system. There are two parts to this problem. First of all, the component provides functionality to retrieve replies from all current conversation threads. Second, it also provides a mechanism to obtain new instances of the AFF scam and pass it to the conversational agent for further procesisng. Both mechanism ensure full automation, so no user control is necessary for the system operation.
+The collector component provides the entry point for messages into the system. There are two parts to this problem. First of all, the component provides the required functionality to retrieve replies from all current conversation threads. Second, it also provides a mechanism to obtain new instances of the AFF scam and pass it to the conversational agent for further procesisng. Both mechanism ensure full automation, so no user interaction is required for system operation.
 
-The solution to the first problem is trivial -- it is briefly described in [SECTION]. In contrast, the problem of obtaining new AFF email messages is more unusual. One common approach is to plant a set of target email addresses in online guestbooks and forums of web sites with high PageRank score. These pages are frequently crawled by email harvester bots. The extracted email addresses are then added to spammers' mailing lists and eventually start receiving spam. Whilst this approach ensures a constant flow of new spam messages, it suffers from two major drawbacks. First of all, it requires manual entry, which is against our principle of full automation. Second, it attracts all types of spam, not advance fee fraud scams specifically. Instead, it is more effective for us to build our own crawler for AFF scams. Its implementation is discussed in [SECTION].
+The solution to the first problem is trivial -- it is briefly described in [SECTION]. In contrast, the problem of obtaining new AFF email messages is more unusual. One common approach is to plant a set of target email addresses in online guestbooks and forums of web sites with high PageRank score. These pages are frequently crawled by email harvester bots. The extracted email addresses are then added to spammers' mailing lists and eventually start receiving spam. Whilst this approach ensures a constant flow of new spam messages, it suffers from two major drawbacks. First of all, it requires manual entry, which is against our principle of full automation. Second, it attracts all types of spam, not advance fee fraud scams specifically. Instead, it is more effective for us to build our own crawler and scraper for AFF scams, as discussed in [SECTION].
 
 % Implementation and protocol
 \section{Implementation}
+
+The implementation of the collector component can be described as a variation of the classical producer-consumer pattern, for $N$ producers and a single consumer, using a FIFO queue. The consumer module defines a uniform, thread-safe interface for accepting messages. Similarly, a set of producer modules define methods for obtaining new messages from various sources. The set of producers run concurrently and implement the consumer interface.
+
+Communication between the consumer and the producers is accomplished through the file system. When a producer starts to fetch a message, it creates a unique temporary buffer on the file system. Once the message is fully downloaded, its contents are flushed to the buffer. Finally, the file is renamed with an extension, which signals it is ready to be consumed. This is safe, because the rename operation is atomic on POSIX compliant operating systems. Concurrently, the consumer spinwaits for new incoming files. If multiple new files are available, it processes them in FIFO order. This approach allows the implementation to be extended easily with new producer modules, without having to change the consumer or any of the existing producers.
+
 % Collector modules
-\section{Collector modules}
+\section{Producer modules}
+For our prototype system, we have implemented three producer modules. 
+Two types of producer modules.
 	% 419eater
 	% identity
 	% mbox
