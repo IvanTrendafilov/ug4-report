@@ -4,13 +4,9 @@ In this chapter we outline our system's mechanism for collecting new messages. W
 
 \section{Motivation}
 
+The collectors component provides the entry point for messages into the system. There are two parts to this problem. First of all, the component provides functionality to retrieve replies from all current conversation threads. Second, it also provides a mechanism to obtain new instances of the AFF scam and pass it to the conversational agent for further procesisng. Both mechanism ensure full automation, so no user control is necessary for the system operation.
 
-The collectors component provides point of entry into the system and has two main functions. First, it monitors all email boxes used by the agent for new messages. Second, crawls and scrapes for new AFF messages.
-
-
- % strange problem
- % automation
- % multiple sources simultaneously
+The solution to the first problem is trivial -- it is briefly described in [SECTION]. In contrast, the problem of obtaining new AFF email messages is more unusual. One common approach is to plant a set of target email addresses in online guestbooks and forums of web sites with high PageRank score. These pages are frequently crawled by email harvester bots. The extracted email addresses are then added to spammers' mailing lists and eventually start receiving spam. Whilst this approach ensures a constant flow of new spam messages, it suffers from two major drawbacks. First of all, it requires manual entry, which is against our principle of full automation. Second, it attracts all types of spam, not advance fee fraud scams specifically. Instead, it is more effective for us to build our own crawler for AFF scams. Its implementation is discussed in [SECTION].
 
 % Implementation and protocol
 \section{Implementation}
