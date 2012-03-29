@@ -18,7 +18,7 @@ Communication between the consumer and the producers is accomplished through the
 \section{Producer modules}
 For our prototype system, we have implemented three producer modules. These fall into two categories: collectors of new scam instances and collectors of replies to existing threads.
 
-\subsection{419eater.com producer}
+\subsection{419eater.com crawler}
 The 419eater.com crawler is an example of a producer which collects new scam instances from the aforementioned web site. 419eater.com is a popular online scam baiting community. Its members use a message board to exchange various information -- scammer names, techniques, etc. Most notably, the message board features a section titled: ``Surplus 419 scam letters'' which receives between 20--25 new AFF scam posts per day. This section is a good source of new scam instances.
 
 The producer crawls the section to build an index of available posts. It then crawls each post and scrapes the message content by matching tags in the HTML parse tree. This is illustrated in the algorithm in [FIGURE].
@@ -39,3 +39,7 @@ The producer crawls the section to build an index of available posts. It then cr
 \EndFor
 \end{algorithmic}
 
+\subsection{Forwarded messages collector}
+The forwarded messages collector was a commonly requested feature in project meetings and is another example of a producer designed to gather new scam instances. Users can configure their email client to forward the contents of their spam folder to an email account monitored by this provider. The collector will then automatically fetch all messages, strip any personally identifiable information and deliver them to the agent for further processing. Depending on the outcome of the classification task, the agent may initiate a series of new conversation threads.
+
+\subsection{
