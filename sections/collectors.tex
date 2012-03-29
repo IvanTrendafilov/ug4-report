@@ -21,17 +21,21 @@ For our prototype system, we have implemented three producer modules. These fall
 \subsection{419eater.com producer}
 The 419eater.com crawler is an example of a producer which collects new scam instances from the aforementioned web site. 419eater.com is a popular online scam baiting community. Its members use a message board to exchange various information -- scammer names, techniques, etc. Most notably, the message board features a section titled: ``Surplus 419 scam letters'' which receives between 20--25 new AFF scam posts per day. This section is a good source of new scam instances.
 
-The producer crawls the section to build an index of available posts. It then crawls each post and scrapes the message content by matching tags in the HTML parse tree. This is illustrated in the algorithm below.
+The producer crawls the section to build an index of available posts. It then crawls each post and scrapes the message content by matching tags in the HTML parse tree. This is illustrated in the algorithm in [FIGURE].
 
-Algorithm:
-	Crawl to establish depth
-	Crawl to build an index
-	for all message in index:
-		build HTML tree
-		find node, save text
-		process()
+% TODO: add caption
+\begin{algorithmic}
+\State $index\gets $ index of all posts
+\State $visited\gets $ index of crawled posts
+\State $messages\gets \emptyset$ 
+\ForAll{$post \in index \setminus visited$}
+	\State $tree \gets $ HTML parse tree
+	\ForAll{$node \in tree$}
+		\If{$\exists text \in node$}
+			\State $messages \gets text \cup messages$ 
+		\EndIf
+	\EndFor
+	\State $visited \gets post \cup visited$
+\EndFor
+\end{algorithmic}
 
-
-	% 419eater
-	% identity
-	% mbox
