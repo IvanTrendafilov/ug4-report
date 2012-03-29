@@ -16,12 +16,22 @@ Communication between the consumer and the producers is accomplished through the
 
 % Collector modules
 \section{Producer modules}
-For our prototype system, we have implemented three producer modules. 
-Two types of producer modules.
+For our prototype system, we have implemented three producer modules. These fall into two categories: collectors of new scam instances and collectors of replies to existing threads.
+
+\subsection{419eater.com producer}
+The 419eater.com crawler is an example of a producer which collects new scam instances from the aforementioned web site. 419eater.com is a popular online scam baiting community. Its members use a message board to exchange various information -- scammer names, techniques, etc. Most notably, the message board features a section titled: ``Surplus 419 scam letters'' which receives between 20--25 new AFF scam posts per day. This section is a good source of new scam instances.
+
+The producer crawls the section to build an index of available posts. It then crawls each post and scrapes the message content by matching tags in the HTML parse tree. This is illustrated in the algorithm below.
+
+Algorithm:
+	Crawl to establish depth
+	Crawl to build an index
+	for all message in index:
+		build HTML tree
+		find node, save text
+		process()
+
+
 	% 419eater
 	% identity
 	% mbox
-
-
-This chapter details the functionality and implementation of the response generation component. As emphasized in sections [SECTION], [SECTION], response generation depends on the outputs of the information extraction, classification, and identity generation components. 
-
