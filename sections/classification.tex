@@ -1,4 +1,52 @@
 \chapter{Classification}
 
-This chapter details the functionality and implementation of the response generation component. As emphasized in sections [SECTION], [SECTION], response generation depends on the outputs of the information extraction, classification, and identity generation components. 
+% What this chapter is about
+
+\section{Overview}
+
+\section{The 419 corpus}
+
+In this section we introduce the 419 corpus -- a collection of $32,000$ advance fee fraud email messages in 22 classes. We have constructed this corpus from freely available data on antifraudintl.org over the course of a week using a crawler, a scraper and a set of preprocessing techniques. Email messages in the corpus span a period of 5 years -- between January 2007 and January 2012.  Each message contains the following information:
+	\begin{itemize}
+	\item A minimal set of headers -- \emph{Subject}, \emph{From} and/or \emph{Reply-To} address.
+	\item An extended set of headers -- these vary, but may contain \emph{Return-Path}, \emph{Received}, \emph{Date}, \emph{X-Originating-IP}, etc.
+	\item A message body -- the contents of the email message
+	\item Scam class -- e.g. \emph{Lottery}, \textit{Next of kin}, etc. See table [TABLE].
+	\end{itemize}
+
+The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in [CHAPTER], we have discarded over $11,000$ malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents $25.6%$ of the original data. In addition to this, we have grouped similar classes together -- e.g., there is no need for separate \textit{Romance scam} and \textit{Russian romance scam} labels. This reduced recognized classes from 31 to 22.
+
+%Talk about validating the messages into the correct classes.
+
+% The 419 Corpus
+%/
+%January 2007 - January 2012 
+basic corpus statistics
+22 classes,  3210, 134MB uncompressed 
+
+
+922		Romance
+870		ATM Card
+638		Western Union & Moneygram
+628		Misc
+603		Widow
+555		Church and Charity
+5473	Next of kin
+454		Military
+444		Refugees
+4347	Lottery
+405		Delivery company
+389		Mystery shopper
+382		Employment
+3659	Government
+276		Commodities
+2615	Business
+1779	Banking
+1742	Compensation
+1625	Dying people
+1608	Fake cheques
+1582	Loans
+1104	Orphans
+
+% Maximum entropy classifier
 

@@ -12,7 +12,9 @@ The solution to the first problem is trivial -- it is briefly described in [SECT
 
 The implementation of the collector component can be described as a variation of the classical producer-consumer pattern, for $N$ producers and a single consumer, using a FIFO queue. The consumer module defines a uniform, thread-safe interface for accepting messages. Similarly, a set of producer modules define methods for obtaining new messages from various sources. The set of producers run concurrently and implement the consumer interface.
 
-Communication between the consumer and the producers is accomplished through the file system. When a producer starts to fetch a message, it creates a unique temporary buffer on the file system. Once the message is fully downloaded, its contents are flushed to the buffer. Finally, the file is renamed with an extension, which signals it is ready to be consumed. This is safe, because the rename operation is atomic on POSIX compliant operating systems. Concurrently, the consumer spinwaits for new incoming files. If multiple new files are available, it processes them in FIFO order. This approach allows the implementation to be extended easily with new producer modules, without having to change the consumer or any of the existing producers.
+Communication between the consumer and the producers is accomplished through the file system. When a producer starts to fetch a message, it creates a unique temporary buffer on the file system. Once the message is fully downloaded, its contents are flushed to the buffer. Finally, the file is renamed with an extension, which signals it is ready to be consumed. This is safe, because the rename operation is atomic on POSIX compliant operating systems. Concurrently, the consumer spinwaits for new incoming files. If multiple new files are available, it processes them in FIFO order. This approach allows the implementation to be extended easily with new producer modules, without having to change the consumer or any of the existing producers. 
+
+[FIGURE of collectors]
 
 % Collector modules
 \section{Producer modules}
@@ -43,9 +45,4 @@ The producer crawls the section to build an index of available posts. It then cr
 The forwarded messages collector was a commonly requested feature in project meetings and is another example of a producer designed to gather new scam instances. Users can configure their email client to forward the contents of their spam folder to an email account monitored by this provider. The collector will then automatically fetch all messages, strip any personally identifiable information and deliver them to the agent for further processing. Depending on the outcome of the classification task, the agent may initiate a series of new conversation threads.
 
 \subsection{Replies collector}
-The replies collector links with the identity generation component to re
-
-The replies collector monitors the s
-
-
-The replies collector has a simple goal -- to collect 
+The replies collector interfaces with the identity generation component to fetch new messages from all email accounts maintained by the agent. This is a very simple proces -- the collector obtains the current list of email accounts, iterates over the list and downloads any new messages from the associated POP3 server and account.  Notably, the collector also observes a limit to the number of consecutive connections allowed to the same POP3 server. This is currently set conservatively to one connection within a 15-minute period, in order to avoid triggering any potential anti-abuse measures.
