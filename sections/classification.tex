@@ -3,27 +3,24 @@
 % What this chapter is about
 
 \section{Overview}
-The classification component serves two purposes. First, it provides a Python wrapper interface to an instance of the Stanford Classifier [REF] -- a Java implementation of a maximum entropy classifier. Second, it provides two trained models -- a scam variation classifier and a PQ classifier. The former helps us determine what type of an advance fee fraud scam we are dealing with. The latter is a binary classifier to recognize instances of personal questions in the body of a message. Both classifiers are trained on a corpus of AFF messages we have constructed for this project.
-
-Automation.
-
-
+The classification component serves two purposes. First, it provides a Python wrapper interface to an instance of the Stanford Classifier [REF] -- a Java implementation of a Maximum Entropy classifier. Second, it provides two trained models to solve text categorization problems. The first model -- the scam variation classifier -- helps us place an incoming message in one of 22 recognized classes of advance fee fraud scams. The second model -- the PQ classifier -- is a binary classifier that recognizes instances of personal questions in the body of a message. Both classifiers are trained on a corpus of AFF messages we have constructed specifically for this project. Their outputs are used to generate relevant responses, as shown in [CHAPTER].
 
 \section{The 419 corpus}
 In this section we introduce the 419 corpus -- a collection of $32,000$ advance fee fraud email messages in 22 classes. We have constructed this corpus from freely available data on antifraudintl.org over the course of a week using a crawler, a scraper and a set of preprocessing techniques. It takes up 134 MB of disk space uncompressed and the data span a period of 5 years -- between January 2007 and January 2012.  Each message contains the following information:
-	\begin{itemize}
+\begin{itemize}
 	\item A minimal set of headers -- \emph{Subject}, \emph{From} and/or \emph{Reply-To} address.
 	\item An extended set of headers -- these vary, but may contain \emph{Return-Path}, \emph{Received}, \emph{Date}, \emph{X-Originating-IP}, etc.
 	\item A message body -- the contents of the email message
 	\item Scam class -- e.g. \emph{Lottery}, \emph{Romance}, etc. See table [TABLE].
-	\end{itemize}
+\end{itemize}
 
 The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in [CHAPTER], we have discarded over $11,000$ malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents 25.6\% of the original data. In addition, we have grouped similar categories together (e.g., \textit{Romance scam} and \textit{Russian romance scam}) and reduced the number of possible classes from 31 to 22. Because the data has been labelled by third parties -- the moderators and users of antifraudintl.org, we have randomly sampled 380 messages to measure the labelling error rate. We define this rate as the percentage of email messages assigned a wrong class over the total number of messages in the sample. With 95\% confidence, we estimate a 0.79\% labelling error rate in the data. Whilst this is not insignificant, given the total size of the corpus, it is unlikely that classification accuracy will be significantly degraded due to the error rate. 
 
-922		Romance
-870		ATM Card
-638		Western Union \& Moneygram
-628		Misc
+
+922		Romance						263179
+870		ATM Card						546786
+638		Western Union \& Moneygram	204352
+628		Misc							192875
 603		Widow
 555		Church and Charity
 5473	Next of kin
@@ -43,5 +40,21 @@ The original data has been preprocessed heavily to construct the corpus. Using t
 1582	Loans
 1104	Orphans
 
-% Maximum entropy classifier
+\section{Methodology}
+In this section we briefly describe the maximum entropy model. We then outline our feature selection and methodology for training the classifiers.
+\subsection{Maximum Entropy model}
+The Maximum Entropy model is a statistical classification model which seeks to optimize for the probability distribution with the maximum entropy, subject to the constraints of the training set . It is a an exponential model of the following form:
+\begin{equation}
+	p(a|b) = \frac{\prod_{j=1}^{k} \alpha_j^{f_i(a,b)}}{\sum_{a} \prod_{j=1}^{k} \alpha_j^{f_j(a,b)}}
+\end{equation}
+\noident where $p(a|b)$ denotes the probability of predicting $a$, given $b$, $\alpha_{j}$ is the estimated weight of feature $f_{i}$, and $\sum_{a} \prod_{j=1}^{k} \alpha_j^{f_j(a,b)}$ is the normalization factor. 
 
+By combining evidence into a bag of features, the Maximum Entropy model allows us to represent knowledge about a problem in the form of contextual predicates. Also, in contrast to Na\"{\i}ve Bayes, another commonly used classifier for text categorization [REFERENCE Mitchell, 1997)], the Maximum Entropy model does not assume conditional independence between observed evidence. This allows us to incorporate overlapping features, such as whole words and corresponding n-grams, and typically achieve better probability estimates than possible with Na\"{\i}ve Bayes. [REF]
+
+% Features
+	- N(-)Grams (length 1--4)
+	- Prefix and Suffix NGrams
+	- lowercase words
+	- lowercase ngrams
+
+% Training strategy
