@@ -3,6 +3,11 @@
 % What this chapter is about
 
 \section{Overview}
+The classification component serves two purposes. First, it provides a Python wrapper interface to an instance of the Stanford Classifier [REF] -- a Java implementation of a maximum entropy classifier. Second, it provides two trained models -- a scam variation classifier and a PQ classifier. The former helps us determine what type of an advance fee fraud scam we are dealing with. The latter is a binary classifier to recognize instances of personal questions in the body of a message. Both classifiers are trained on a corpus of AFF messages we have constructed for this project.
+
+Automation.
+
+
 
 \section{The 419 corpus}
 In this section we introduce the 419 corpus -- a collection of $32,000$ advance fee fraud email messages in 22 classes. We have constructed this corpus from freely available data on antifraudintl.org over the course of a week using a crawler, a scraper and a set of preprocessing techniques. It takes up 134 MB of disk space uncompressed and the data span a period of 5 years -- between January 2007 and January 2012.  Each message contains the following information:
