@@ -5,29 +5,19 @@
 \section{Overview}
 
 \section{The 419 corpus}
-
-In this section we introduce the 419 corpus -- a collection of $32,000$ advance fee fraud email messages in 22 classes. We have constructed this corpus from freely available data on antifraudintl.org over the course of a week using a crawler, a scraper and a set of preprocessing techniques. Email messages in the corpus span a period of 5 years -- between January 2007 and January 2012.  Each message contains the following information:
+In this section we introduce the 419 corpus -- a collection of $32,000$ advance fee fraud email messages in 22 classes. We have constructed this corpus from freely available data on antifraudintl.org over the course of a week using a crawler, a scraper and a set of preprocessing techniques. It takes up 134 MB of disk space uncompressed and the data span a period of 5 years -- between January 2007 and January 2012.  Each message contains the following information:
 	\begin{itemize}
 	\item A minimal set of headers -- \emph{Subject}, \emph{From} and/or \emph{Reply-To} address.
 	\item An extended set of headers -- these vary, but may contain \emph{Return-Path}, \emph{Received}, \emph{Date}, \emph{X-Originating-IP}, etc.
 	\item A message body -- the contents of the email message
-	\item Scam class -- e.g. \emph{Lottery}, \textit{Next of kin}, etc. See table [TABLE].
+	\item Scam class -- e.g. \emph{Lottery}, \emph{Romance}, etc. See table [TABLE].
 	\end{itemize}
 
-The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in [CHAPTER], we have discarded over $11,000$ malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents $25.6%$ of the original data. In addition to this, we have grouped similar classes together -- e.g., there is no need for separate \textit{Romance scam} and \textit{Russian romance scam} labels. This reduced recognized classes from 31 to 22.
-
-%Talk about validating the messages into the correct classes.
-
-% The 419 Corpus
-%/
-%January 2007 - January 2012 
-basic corpus statistics
-22 classes,  3210, 134MB uncompressed 
-
+The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in [CHAPTER], we have discarded over $11,000$ malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents 25.6\% of the original data. In addition, we have grouped similar categories together (e.g., \textit{Romance scam} and \textit{Russian romance scam}) and reduced the number of possible classes from 31 to 22. Because the data has been labelled by third parties -- the moderators and users of antifraudintl.org, we have randomly sampled 380 messages to measure the labelling error rate. We define this rate as the percentage of email messages assigned a wrong class over the total number of messages in the sample. With 95\% confidence, we estimate a 0.79\% labelling error rate in the data. Whilst this is not insignificant, given the total size of the corpus, it is unlikely that classification accuracy will be significantly degraded due to the error rate. 
 
 922		Romance
 870		ATM Card
-638		Western Union & Moneygram
+638		Western Union \& Moneygram
 628		Misc
 603		Widow
 555		Church and Charity
