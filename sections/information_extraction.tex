@@ -5,7 +5,6 @@
 The goal of the information extraction component is to obtain useful information from incoming messages. The main tasks performed by this component are named-entity recognition, email extraction, HTML removal, header parsing, quoted text removal and relationship disambiguation. Because this component is the first processing step after entry into the system, it is equipped with methods to deal with potentially dirty data [SECTION]. Once relevant information is extracted, the result is passed as input to the response generation component and is used to generate a convicing, human-like response. For example, the outputs of the named-entity recognition (NER) task might be used to compose a personalized greeting in the beginning of the message -- e.g., ``\textit{Hello John}''.
 
 \section{Implementation}
-
 In order to extract the information we are interested in, we apply a series of transformations to each incoming message. These steps are summarized in the algorithm below:
 \begin{enumerate}
 \item remove HTML % 1
@@ -35,4 +34,16 @@ We observe that correct headers follow a set pattern: \textit{``Header: content'
 Another problem with parsing incoming email messages is HTML. Popular web-based email services regularly use HTML to format outgoing messages. As these messages are multi-part, some are encoded in both \emph{text/plain} and \emph{text/html}, whilst others only offer \emph{text/html}. For messages available only in HTML format, we construct a HTML parse tree and remove all nodes that do not contain text. Finally, we strip all tags and convert any ampersand character codes to ASCII, where possible -- e.g.,  \emph{\&amp;} to \emph{\&}.
 
 \subsection{Named-entity recognition and emails}
+Named-entity recognition (NER) is an information extraction task which seeks to locate and classify entities in text into a set of predefined categories -- e.g., \textit{Persons, Locations, Organizations}. For our prototype system, we are interested only in the \emph{Persons} category, although other categories might have applications for certain scam variations.  By performing NER on the message body, we hope to find out the names of all actors in a scam with high accuracy and pass that information to the response generation component. This is a challenging problem, but there are systems available which offer high performance on these tasks.
+
+One example is the Stanford Named Entity Recognizer. It is a Java implementation of a Conditional Random Field (CRF) classifier 
+
+Despite this, there are systems available, which offer high performance on these tasks. 
+
+
+Despite this, F$_{1}$
+
+
+
 Pre-trained model
+CoNNL
