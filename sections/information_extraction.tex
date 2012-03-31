@@ -1,5 +1,5 @@
 \chapter{Information extraction}
-% what is this chapter about
+This chapter discusses the implementation of the information extraction component. In [SECTION], we briefly motivate its functionality. In [SECTION], we describe some of the challenges of dealing with non-homogeneous input data. Lastly, [SECTION] outlines our approach to named-entity recognition and the relationship between named entities and email addresses.
 
 \section{Overview}
 The goal of the information extraction component is to obtain useful information from incoming messages. The main tasks performed by this component are named-entity recognition, email extraction, HTML removal, header parsing, quoted text removal and relationship disambiguation. Because this component is the first processing step after entry into the system, it is equipped with methods to deal with potentially dirty data [SECTION]. Once relevant information is extracted, the result is passed as input to the response generation component and is used to generate a convicing, human-like response. For example, the outputs of the named-entity recognition (NER) task might be used to compose a personalized greeting in the beginning of the message -- e.g., ``\textit{Hello John}''.
@@ -21,7 +21,7 @@ In order to extract the information we are interested in, we apply a series of t
 \vspace{-5mm}
 \item extract all emails from the message body % 7
 \vspace{-5mm}
-\item compute relationships between emails and named-entities %8 
+\item compute any relationships between emails and named-entities %8 
 \end{enumerate}
 
 The implementation of steps1--4 and how we deal with dirty data is discussed in [SECTION]. Similarly, in [SECTION] we outline our approach to named-entity recognition and the computation of the named-entity, email pairs.
@@ -38,6 +38,7 @@ Named-entity recognition (NER) is an information extraction task which seeks to 
 
 One example is the Stanford Named Entity Recognizer [REF]. It is a Java implementation of a linear chain Conditional Random Field (CRF) classifier [REF, REF] and comes with large pre-trained models on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this project we are specifically interested in the provided 3 class model, as it is reported to have a F$_{1}$ score of 90.36 for the \emph{Persons} class on the CoNNL 2003 dataset. Its features are presented in [TABLE]:
 
+[PLACEHOLDER FOR BIG TABLE]
 % Current word
 % Previous word
 % Next word
@@ -51,9 +52,6 @@ One example is the Stanford Named Entity Recognizer [REF]. It is a Java implemen
 
 Whilst the aforementioned entity corpora provide a robust coverage of the English language, we have also measured the performance of the model on AFF-specific emails on a small training set. The results are available in [CHAPTER]. 
 
-Another important problem is to determine the relationships between named entities and extracted email addresses. As we explained in [BACKGROUND], a single scam message may involve multiple actors and contain multiple email addresses. It is necessary to pair actors with the correct email addresses when composing a reply. Failure to do so may result in replying to a non-existing address or addressing the scammer under the wrong name. Formally, given a set of named entities $N = $\{$n_{1}, n_{2},...,n_{m}$\} and a set of email addresses $E = $\{e_{1}, e_{2},...,e_{p}$\, compute all pairs $(n, e)$, such that each pair belongs to a unique actor in the scam. This is a difficult problem, but we can observe that in AFF scams email addresses are often a variation of a person's real name. Alternatively, they are located in proximity to a named entity.
+Another important problem is to determine the relationship between named entities and extracted email addresses. As we explained in [BACKGROUND], a single scam message may involve multiple actors and contain multiple email addresses. It is necessary to pair actors with the correct email addresses when composing a reply. Failure to do so may result in replying to a non-existing address or addressing the scammer under the wrong name. Formally, given a set of named entities $N = $\{$n_{1}, n_{2},...,n_{m}$\} and a set of email addresses $E = $\{$e_{1}, e_{2},...,e_{p}$\, compute all pairs $(n, e)$, such that each pair belongs to a unique actor in the scam. This is a difficult problem, but we can observe that in AFF scams email addresses are often a variation of a person's real name. Alternatively, they are located in proximity to a named entity.
 
-We propose a two-round algorithm. In the first round, we remove the domain name from $\forall \in E$ and compute string similarity using bigrams $\forall (n, e)$ pairs $\in N, E$. Next, we rank all pairs by similarity score $Sc$ and place the top pairs in a bucket $B$, such that
-
-
-we compute string similarity using bigrams for all $(n, e)$ pairs $\in N, E$. We rank 
+We propose a two-round algorithm. In the first round, we remove all domain names from $\forall e \in E$ and compute string similarity using bigrams $\forall (n, e) \in N, E$. Next, we rank all pairs by similarity score $Sc$, remove the top pairs for each named entity from $N, E$ and place them in a bucket $B$, provided $Sc > minconst$, where $mincost$ is the minimum bigram similarity score required ($minconst = 0.40$ in our implementation). In the second round, we rank all remaining pairs $(n, e)$ by word distance (measured by the number of words between $n$ and $e$). Finally, for each remaining $n \in N$, we add the $(n, e)$ with the lowest word distance score to $B$. The bucket now contains all valid (n, e) pairs.
