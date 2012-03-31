@@ -30,67 +30,9 @@ The implementation of steps1--4 and how we deal with dirty data is discussed in 
 \subsection{Dealing with dirty data}
 As we explained in [CHAPTER], a web crawler is one of the main sources of new email messages for our system. Whilst this aids automation, it also creates a number of problems. First, because messages are posted by human forum participants, they rarely conform to MIME or any other RFC memoranda. The lack of standartization makes it impossible to rely on a standard, compliant parsers to extract the headers and payload of our messages. Under MIME, the body part of a message is separated from the headers via a blank line [REF]. This is often omitted in human posts. Furthermore, email clients and servers attach custom headers to processed email messages, so there is no standard set of headers we can match against. Finally, some of the messages downloaded by the crawler are not emails at all, so we also need a way to discard them.
 
-We observe that correct headers follows the pattern: \textit{``Header: content''}. Furthermore, there is at most one header per line and headers are placed on consecutive lines in the message. Using that observation, we propose a best-effort solution. Ahead of time, we have compiled a vocabulary $V$ of 144 verified headers. Then, for each incoming message $M$, we use regular expressions to match the contents of the message against the standard set of headers $S$, such that $S = $\{$Subject, To, From, Reply$-$To\}$. If we fail to match at least three, we discard the message, as it is not a valid email. If we find a match, we then iterate over all lines in the message to find $L_{vmax}$, defined to be the last line that matches a header $\in V$.
+We observe that correct headers follow a set pattern: \textit{``Header: content''}. Furthermore, there is at most one header per line and headers are placed on consecutive lines in the message. Using that observation, we propose a best-effort algorithm to address the problem above. We use a vocabulary $V$ of 144 verified headers (compiled ahead of time). Then, for each incoming message $M$, we use a regular expression to match the contents of the message against the standard set of headers $S$, such that $S = $\{$Subject, To, From, Reply$-$To\}$. If we fail to match at least three elements of $S$, we discard the message, as it is not a valid email. If we find a match, we then iterate over all lines in the message to find $L_{vmax}$, defined to be the last line that contains a header $\in V$. $L_{vmax}$ allows us to split the message into two segment -- headers and body. Lastly, we iterate over all lines in the headers segment and match each line against our header heuristic. If there is a match, we augment $V$, which gradually improves the performance of the algorithm.
 
-
-
-Ahead of time, we have built a vocabulary $V$ with 144 verified headers. Then, for each incoming message $M$, we match each line against a regular expression 
-
-
-
-Then, for each incoming message $M$, we match its contents against a regular expression
-
-
-We propose a best-effort solution
-
-
-Using a heuristic, we have built a vocabulary $V$ with 144 verified headers.
-
-
-Furthermore, there is at most one header per line and multiple headers are placed on consecutive lines 
-
-there is at most one header per line, and multiple headers are placed on consecutive lines. Using a heuristic, we have manually added 144 recognized headers to $V$ ahead of time. Then, for each message $M$, we match $M$ against a regular expression for  
-
-there is at most a single header on a line and 
-
-Using a heuristic, we have manually labelled and added 144 recognized headers to $V$ ahead of time. For each incoming message $M$, 
-
-Using a heuristic, we have added and verified 144 recognized headers to $V$.
-
-We have added and verified 144 headers
-
-, which uses a vocabulary $V$ 
-
-We propose a best-effort solution to the described problem. 
-
-For each incoming message $M$, we match against the standard set of headers: 
-
-
-each incoming message, we use regular expressions to 
-
-25.6% discard rate
- messages downloaded by the crawler are not email messages at all, so we need a way to discard them.
-
-
-In our sample of 400, 78% of the processed data.
-
-
-Furtheremore, a crucial part of the standard is a blank line, which separates headers from the message body. In 
-
-message headers and payload. 
-
-on standard, compliant parsers, which are provided 
-
-This makes it impossible for standard compliant parsers to process.
-
-they rarely conform to the MIME standard (or any accepted RFCs), which makes it impossible for standard compliant parsers
-
-, which make s
-
-
-Crawler is one of the main sources of messages. Problem with that, these posts are made by people in variety of formats. The most common problem - there is no blank line to differentiate between the headers part of the message and the payload.  Additional problem is that every email client and mail server has a custom header. We determine what type of dirty data we are dealing from its origin - 
-
-Our strategy is best effort. We use regular expressions to match headers and a vocabularly. The problem i
-
+Another problem with parsing incoming email messages is HTML. Popular web-based email services regularly use HTML to format outgoing messages. As these messages are multi-part, some are encoded in both \emph{text/plain} and \emph{text/html}, whilst others only offer \emph{text/html}. For messages available only in HTML format, we construct a HTML parse tree and remove all nodes that do not contain text. Finally, we strip all tags and convert any ampersand character codes to ASCII, where possible -- e.g.,  \emph{\&amp;} to \emph{\&}.
 
 \subsection{Named-entity recognition and emails}
+Pre-trained model
