@@ -10,7 +10,7 @@ Throughout this chapter, for the sake of clarity and brevity, we use the followi
 \item[Thread] Each thread is defined as a logical unit of all messages related to a single instance of a scam. Threads are proportional and contain messages from both the agent and the scammer.
 \item[$\mathbf B_{rate}$] This is a measure of the bounce rate of our sample. It is defined as all threads containing messages that cannot be delivered (due to deleted email boxes, exceeded quota, etc.) over the total number of threads.
 \item[$\mathbf P_{rate}$] This is a measure of the participation rate of our sample. It is defined as all threads that contain at least one reply from a scammer, over the total number of threads in the sample (excluding bounced threads).
-\item[Other abbreviations] For brevity in tables, we use the abbreviations \textit{TP, FN, FP, TN} to mean, respectively, \textit{True Positive, False Negative, False Positive, True Negative}.
+\item[Other abbreviations] For brevity, in some tables we use the abbreviations \textit{TP, FN, FP, TN} to mean, respectively, \textit{True Positive, False Negative, False Positive, True Negative}.
 \end{description}
 
 \section{Intermediate results}
@@ -80,6 +80,29 @@ Persons & 354 & 85 & 31 & 18185 & 0.919 & 0.806 & 0.859 \\ \hline
 \section{Conversation results}
 In this section we present results of the conversations our system has maintained with scammers. We begin by reviewing our methodology. In Sections [SECTION][SECTION], we describe a number of interesting statistics.
 \subsection{Methodology}
+To measure the performance of our prototype system, we deployed it on a virtual private server ([SECTION]) and let it run continuously from 19 March to 28 March. Over the 10-day period, the system gathered and processed 348 scam instances in 19 classes. Of the 348 instances, 45 were in the set of currently supported classes -- \textit{Lottery, Orphans, Mystery shopper}. We present detailed statistics from these conversation threads in [SECTION]. To put our results in context, we provide several baseline measures, depending on the purpose of the experiment. For example, to measure the bounce rate of threads, we draw random samples from the remaining set of scam instances, in order to compare it with the sample obtained by the system.
+
+\begin{center}
+\scalebox{0.85}{
+%\begin{tabular}{|l c|}
+\begin{tabular}{l c}
+  \hline
+  \multicolumn{2}{c}{Experiment overview} \\
+  \hline
+  Duration & 10 days \\ %\hline
+  Scam instances & 348 \\ %\hline
+  Encountered classes & 19 \\ %\hline
+  Threads & 45 \\ 
+  \hline
+\end{tabular}
+}
+\end{center}
+
+\subsection{Bouce rate}
+We m
+
+
+a 10-day period from a virtual private server ([SECTION environemtn]). Over the course 
 
 	3. Conversation results
 		i. Methodology 3 samples. sample 1 organic from the client. sample 2, random subset of 
