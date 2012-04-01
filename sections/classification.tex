@@ -67,6 +67,6 @@ Optimal feature selection for supervised learning problems is a challenging task
 
 \subsection{Training the classifiers}
 
-We have trained both classifiers on data from the 419 corpus.  The scam variation classifier is trained on a 80% random sample of the corpus, obtained using the following procedure: $\forall k_{1,2...,22} \in S$, $T=$\{$80\% \times k_{1}, 80\% \times k_{2},..., 80\% \times k_{22}$\}, where $k_{n}$ represents each class, $S$ is the set of messages in the corpus and $T$ is training set. The PQ classifier is trained using a similar procedure, except the training set is smaller -- 400 manually labelled messages. 
+We have trained both classifiers on data from the 419 corpus.  The scam variation classifier is trained on a 80% random sample of the corpus, obtained using the following procedure: $\forall k_{1,2...,22} \in S$, $T=$\{$80\% \times k_{1}, 80\% \times k_{2},..., 80\% \times k_{22}$\}, where $k_{n}$ represents each class, $S$ is the set of messages in the corpus and $T$ is training set. The PQ classifier is trained using a similar procedure, except our training and validation sets are smaller -- 500 manually labelled messages.
 
-To measure the accuracy of our predictive models, we do cross-validation using a 80:20 split. This translates to 6,400 and 100 messages in the validation sets for the scam variation and PQ classifiers, respectively. The results are available in [CHAPTER, SECTION].
+In order to estimate the performance of our predictive models, we have performed cross-validation. The methodology and results are presented in [CHAPTER, SECTION].

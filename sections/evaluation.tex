@@ -1,29 +1,27 @@
 \chapter{Evaluation}
-This chapter contrains the evaluation of our prototype system. In [SECTION .1] we define the terminology we use in our results. [SECTION 1.2] focuses on intermediate results, i.e., results of various probabilistic classification tasks. Finally, we provide a discussion on the meaning of these results.
+This chapter contrains the evaluation of our prototype system. In [SECTION .1] we define the terminology we use in our results. [SECTION 1.2] focuses on intermediate results, i.e., results of various probabilistic tasks. Finally, we provide a discussion on the meaning of these results.
 
 \section{Terminology}
+Throughout this chapter, for the sake of clarity and brevity, we use the following terminology to present our results.
 \begin{description}
 \item[F$_{1}$] The F$_{1}$ score (also F-measure) is the harmonic mean of precision ($p$) and recall $(r)$, as defined by the formula: F$_{1} = \frac{2rp}{r + p}$.
-\item[Macro F$_{1}$] 
-This is a shorter item label, and some text that talks about it.
-The text is wrapped into a paragraph, with successive lines indented.
-\item[Rather longer label] This is a longer item label.  As you can see, the
-text is not started a specified distance in -- unlike with other lists -- but
-is spaced a fixed distance from the end of the label.
+\item[Macro F$_{1}$] The value is the result of averaging the F$_{1}$ scores for all classes.
+\item[Micro F$_{1}$] The value represents a global calculation of F$_{1}$, regardless of class.
+\item[Thread] Each thread is defined as a logical unit of all messages related to a single instance of a scam. Threads are proportional and contain messages from both the agent and the scammer.
+\item[$\mathbf B_{rate}$] This is a measure of the bounce rate of our sample. It is defined as all threads containing messages that cannot be delivered (due to deleted email boxes, exceeded quota, etc.) over the total number of threads.
+\item[$\mathbf P_{rate}$] This is a measure of the participation rate of our sample. It is defined as all threads that contain at least one reply from a scammer, over the total number of threads in the sample (excluding bounced threads).
 \end{description}
 
-	1. Terminology
-		- F-score
-		- Macro F1
-		- Micro F1
-		- Brate - Bounce rate 
-		- Prate  Participation rate
-		- Thread
+\section{Intermediate results}
+The intermediate results presented in this section measure the performance of probabilistic tasks in the classification and information extraction component.
+\subsection{Scam variation classifier}
 
 	2. Intermediate results
 		i. Performance of the model for determining email classification
+			80:20 split, 5966 messages
 			Methodology
 		ii. Performance of the model for detecting personal questions
+			2-fold cross validation, 250 messages
 			Methodology
 		iii. Named-entity recognition performance
 			Methodology
