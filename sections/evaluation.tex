@@ -1,4 +1,79 @@
 \chapter{Evaluation}
+This chapter contrains the evaluation of our prototype system. In [SECTION .1] we define the terminology we use in our results. [SECTION 1.2] focuses on intermediate results, i.e., results of various probabilistic classification tasks. Finally, we provide a discussion on the meaning of these results.
+
+\section{Terminology}
+\begin{description}
+\item[F$_{1}$] The F$_{1}$ score (also F-measure) is the harmonic mean of precision ($p$) and recall $(r)$, as defined by the formula: F$_{1} = \frac{2rp}{r + p}$.
+\item[Macro F$_{1}$] 
+This is a shorter item label, and some text that talks about it.
+The text is wrapped into a paragraph, with successive lines indented.
+\item[Rather longer label] This is a longer item label.  As you can see, the
+text is not started a specified distance in -- unlike with other lists -- but
+is spaced a fixed distance from the end of the label.
+\end{description}
+
+	1. Terminology
+		- F-score
+		- Macro F1
+		- Micro F1
+		- Brate - Bounce rate 
+		- Prate  Participation rate
+		- Thread
+
+	2. Intermediate results
+		i. Performance of the model for determining email classification
+			Methodology
+		ii. Performance of the model for detecting personal questions
+			Methodology
+		iii. Named-entity recognition performance
+			Methodology
+	3. Conversation results
+		i. Methodology 3 samples. sample 1 organic from the client. sample 2, random subset of 
+		0. Setup. 10-days. 348 + 45. Another sample where we manually responded to 20 messages. Say time is limited.
+		i. Bounce rate
+			- bounce rate for thread
+			- bounce rate for baseline
+		ii. Participation rate
+			- braindead rate
+			- test sample
+			- other sample
+		iv. Distribution of scam
+		v.  Average thread length, words per thread
+			- inclusive of all
+			- existing emails
+			- answered emails
+			- human-sized sample 35/5 = 6.8
+
+
+Possible other measures: In addition to average thread length, average number of words in thread? If it's easy to remove quoting etc., average % of first message replied to, histogram of thread length, average thread length by spam type ???
+
+
+
+
+
+
+This chapter contains the evaluation 
+
+
+
+design and all probabilistic classification tasks. In 
+
+In addition, we also present results from all probabilistic classification tasks.
+
+some intermediate results from 
+
+the evaluation of the performance of our system, as well as 
+
+
+This chapter contains the evaluation of the methods proposed in the previous
+part, chapter 4. In section 5.1, we present the data sets and the methodology
+used for testing. We give details about the parameter choices and set baseline
+scores obtained by either classical NCA or simple linear projections, such as PCA,
+LDA or RCA. Results for each individual method are presented in sections 5.3
+and 5.4. A comparison of the methods is shown in subsection 5.3.4 using accuracy
+versus time plots.
+We should mention that we did not include all the results in this chapter to
+prevent cluttering. Further experimentations can be found in appendix B
 
 This chapter details the functionality and implementation of the response generation component. As emphasized in sections [SECTION], [SECTION], response generation depends on the outputs of the information extraction, classification, and identity generation components. 
 

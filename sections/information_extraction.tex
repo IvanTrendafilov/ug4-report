@@ -50,7 +50,7 @@ One example is the Stanford Named Entity Recognizer [REF]. It is a Java implemen
 % Presence of Word in Left Window (size 4)
 % Presence of Word in Right Window (size 4)
 
-Whilst the aforementioned entity corpora provide a robust coverage of the English language, we have also measured the performance of the model on AFF-specific emails on a small training set. The results are available in [CHAPTER]. 
+Whilst the aforementioned entity corpora provide a robust coverage of the English language, we have also measured the performance of the model on AFF-specific emails on a small validation set. The results are available in [CHAPTER]. 
 
 Another important problem is to determine the relationship between named entities and extracted email addresses. As we explained in [BACKGROUND], a single scam message may involve multiple actors and contain multiple email addresses. It is necessary to pair actors with the correct email addresses when composing a reply. Failure to do so may result in replying to a non-existing address or addressing the scammer under the wrong name. Formally, given a set of named entities $N = $\{$n_{1}, n_{2},...,n_{m}$\} and a set of email addresses $E = $\{$e_{1}, e_{2},...,e_{p}$\}, compute all pairs $(n, e)$, such that each pair belongs to a unique actor in the scam. This is a difficult problem, but we can observe that in AFF scams email addresses are often a variation of a person's real name. Alternatively, they are located in proximity to a named entity.
 
