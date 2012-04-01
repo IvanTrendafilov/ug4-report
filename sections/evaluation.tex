@@ -77,16 +77,10 @@ Persons & 354 & 85 & 31 & 18185 & 0.919 & 0.806 & 0.859 \\ \hline
 }
 \end{center}
 
+\section{Conversation results}
+In this section we present results of the conversations our system has maintained with scammers. We begin by reviewing our methodology. In Sections [SECTION][SECTION], we describe a number of interesting statistics.
+\subsection{Methodology}
 
-	2. Intermediate results
-		i. Performance of the model for determining email classification
-			80:20 split, 5966 messages
-			Methodology
-		ii. Performance of the model for detecting personal questions
-			2-fold cross validation, 250 messages
-			Methodology
-		iii. Named-entity recognition performance
-			Methodology
 	3. Conversation results
 		i. Methodology 3 samples. sample 1 organic from the client. sample 2, random subset of 
 		0. Setup. 10-days. 348 + 45. Another sample where we manually responded to 20 messages. Say time is limited.
@@ -98,6 +92,13 @@ Persons & 354 & 85 & 31 & 18185 & 0.919 & 0.806 & 0.859 \\ \hline
 			- test sample
 			- other sample
 		iv. Distribution of scam
+
+{'church_and_charity': 3, 'next_of_kin': 45, 'lottery': 41, 'fake_cheques': 4, 'business': 41, 'dying_people': 9, 'orphans': 3, 'government': 18, 'misc': 18, 'romance': 56, 'banking': 7, 'compensation': 2, 'delivery_company': 14, 'commodities': 4, 'mystery_shopper': 1, 'western_union_and_moneygram': 7, 'loans': 61, 'atm_card': 7, 'widow': 7}
+
+348 scam instances, 19 classes, 45 supported scam instances
+
+
+
 		v.  Average thread length, words per thread
 			- inclusive of all
 			- existing emails
