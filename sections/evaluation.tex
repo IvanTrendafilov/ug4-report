@@ -1,5 +1,5 @@
 \chapter{Evaluation}
-This chapter contrains the evaluation of our prototype system. In [SECTION .1] we define the terminology we use in our results. [SECTION 1.2] focuses on intermediate results, i.e., results of various probabilistic tasks. Finally, we provide a discussion on the meaning of these results.
+T\his chapter contrains the evaluation of our prototype system. In [SECTION .1] we define the terminology we use in our results. [SECTION 1.2] focuses on intermediate results, i.e., results of various probabilistic tasks. Finally, we provide a discussion on the meaning of these results.
 
 \section{Terminology}
 Throughout this chapter, for the sake of clarity and brevity, we use the following terminology to present our results.
@@ -10,11 +10,53 @@ Throughout this chapter, for the sake of clarity and brevity, we use the followi
 \item[Thread] Each thread is defined as a logical unit of all messages related to a single instance of a scam. Threads are proportional and contain messages from both the agent and the scammer.
 \item[$\mathbf B_{rate}$] This is a measure of the bounce rate of our sample. It is defined as all threads containing messages that cannot be delivered (due to deleted email boxes, exceeded quota, etc.) over the total number of threads.
 \item[$\mathbf P_{rate}$] This is a measure of the participation rate of our sample. It is defined as all threads that contain at least one reply from a scammer, over the total number of threads in the sample (excluding bounced threads).
+\item[Other abbreviations] For brevity in tables, we use the abbreviations \textit{TP, FN, FP, TN} to mean, respectively, \textit{True Positive, False Negative, False Positive, True Negative}.
 \end{description}
 
 \section{Intermediate results}
 The intermediate results presented in this section measure the performance of probabilistic tasks in the classification and information extraction component.
+
 \subsection{Scam variation classifier}
+As explained in [CHAPTER], the scam variation classifier is trained using a classical 80:20 split on data from the 419 corpus. $5,996$ messages comprise our validation set. The results are summarized in [TABLE].
+
+
+\begin{center}
+\scalebox{0.85}{
+\begin{tabular}{| l*{6}{c}c |}
+\hline
+\textbf{Class} & \textbf{TP} & \textbf{FN} & \textbf{FP} & \textbf{TN} & \textbf{Precision} & \textbf{Recall} & \textbf{F$_{1}$} \\ \hline
+ATM card & 106 & 50 & 55 & 5755 & 0.658 & 0.679 & 0.669 \\ \hline
+Employment & 35 & 22 & 17 & 5892 & 0.673 & 0.614 & 0.642 \\ \hline
+Next of kin & 962 & 98 & 99 & 4807 & 0.907 & 0.908 & 0.907 \\ \hline
+Banking & 206 & 132 & 146 & 5482 & 0.585 & 0.609 & 0.597 \\ \hline
+Fake cheques & 233 & 31 & 30 & 5672 & 0.886 & 0.883 & 0.884 \\ \hline
+Orphans & 153 & 60 & 55 & 5698 & 0.736 & 0.718 & 0.727 \\ \hline
+Business & 287 & 211 & 234 & 5234 & 0.551 & 0.576 & 0.563 \\ \hline
+Government & 552 & 137 & 122 & 5155 & 0.819 & 0.801 & 0.810 \\ \hline
+Refugees & 51 & 36 & 29 & 5850 & 0.638 & 0.586 & 0.611 \\ \hline
+Church \& Charity & 79 & 26 & 15 & 5846 & 0.840 & 0.752 & 0.794 \\ \hline
+Loans & 253 & 10 & 10 & 5693 & 0.962 & 0.962 & 0.962 \\ \hline
+Romance & 134 & 14 & 26 & 5792 & 0.838 & 0.905 & 0.870 \\ \hline
+Commodities & 35 & 18 & 11 & 5902 & 0.761 & 0.660 & 0.707 \\ \hline
+Lottery & 801 & 30 & 53 & 5082 & 0.938 & 0.964 & 0.951 \\ \hline
+WU \& MoneyGram & 92 & 23 & 31 & 5820 & 0.748 & 0.800 & 0.773 \\ \hline
+Compensation & 275 & 60 & 70 & 5561 & 0.797 & 0.821 & 0.809 \\ \hline
+Military & 77 & 9 & 6 & 5874 & 0.928 & 0.895 & 0.911 \\ \hline
+Widow & 55 & 61 & 36 & 5814 & 0.604 & 0.474 & 0.531 \\ \hline
+Delivery company & 50 & 26 & 17 & 5873 & 0.746 & 0.658 & 0.699 \\ \hline
+Misc & 82 & 41 & 34 & 5809 & 0.707 & 0.667 & 0.686 \\ \hline
+Dying people & 270 & 24 & 25 & 5647 & 0.915 & 0.918 & 0.917 \\ \hline
+Mystery shopper & 55 & 4 & 2 & 5905 & 0.965 & 0.932 & 0.948 \\ \hline
+\multicolumn{8}{ |r| }{\textbf{Macro F$_{1}$: 0.81177}} \\ \hline
+\multicolumn{8}{ |r| }{\textbf{Micro F$_{1}$: 0.77134}} \\ \hline
+\end{tabular}
+}
+\end{center}
+
+
+
+
+
 
 	2. Intermediate results
 		i. Performance of the model for determining email classification
