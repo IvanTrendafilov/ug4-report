@@ -17,9 +17,7 @@ Throughout this chapter, for the sake of clarity and brevity, we use the followi
 The intermediate results presented in this section measure the performance of probabilistic tasks in the classification and information extraction component.
 
 \subsection{Scam variation classifier}
-As explained in [CHAPTER], the scam variation classifier is trained using a classical 80:20 split on data from the 419 corpus. $5,996$ messages comprise our validation set. The results are summarized in [TABLE].
-
-
+The scam variation classifier is trained on a classical 80:20 split of data from the 419 corpus. Our model achieves Macro F$_{1} = 0.81177$ and Micro F$_{1}= 0.77134$ on the $5,996$ data points in the validation set. A breakdown of the results is shown in [FIGURE].
 \begin{center}
 \scalebox{0.85}{
 \begin{tabular}{| l*{6}{c}c |}
@@ -53,9 +51,31 @@ Mystery shopper & 55 & 4 & 2 & 5905 & 0.965 & 0.932 & 0.948 \\ \hline
 }
 \end{center}
 
-
-
-
+\subsection{PQ classifier}
+We evaluate the performance of the personal questions (PQ) classifier using 2-fold cross-validation on a set of 500 email messages. The averaged results are shown in [TABLE]. Note that since this is a binary classifier, the first two table rows are reciprocal.
+\begin{center}
+\scalebox{0.85}{
+\begin{tabular}{| l*{6}{c}c |}
+\hline 
+\textbf{Class} & \textbf{TP} & \textbf{FN} & \textbf{FP} & \textbf{TN} & \textbf{Precision} & \textbf{Recall} & \textbf{F$_{1}$} \\ \hline
+PQ & 96 & 26 & 7 & 121 & 0.932 & 0.787 & 0.853 \\ \hline
+No PQ & 121 & 7 & 26 & 96 & 0.823 & 0.945 & 0.880 \\ \hline
+\multicolumn{8}{ |r| }{\textbf{Macro F$_{1}$: 0.86800}} \\ \hline
+\multicolumn{8}{ |r| }{\textbf{Micro F$_{1}$: 0.86667}} \\ \hline
+\end{tabular}
+}
+\end{center}
+\subsection{Named-entity recognition classifier}
+As described in [SECTION], we use a CRF classifier with a pre-trained model on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this section, we measure the model's performance on a validation set of 50 manually labelled messages (18655 words) from the 419 corpus. Whilst the sample is comparatively small, our time is limited and the model is already reported to achieve F$_{1} = 90.36$ for the \emph{Persons} class on the CoNNL 2003 dataset (see [SECTION]). The results are summarized in [TABLE]. Note that we do not include the \emph{Locations} and \emph{Organizations} classes, as they are not relevant to our use case.
+\begin{center}
+\scalebox{0.85}{
+\begin{tabular}{| l*{6}{c}c |}
+\hline 
+\textbf{Class} & \textbf{TP} & \textbf{FN} & \textbf{FP} & \textbf{TN} & \textbf{Precision} & \textbf{Recall} & \textbf{F$_{1}$} \\ \hline
+Persons & 354 & 85 & 31 & 18185 & 0.919 & 0.806 & 0.859 \\ \hline
+\end{tabular}
+}
+\end{center}
 
 
 	2. Intermediate results
