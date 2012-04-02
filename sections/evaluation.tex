@@ -134,16 +134,17 @@ We compare the participation rate [SECTION] achieved by our system with two base
 \end{center}
  
 \subsection{Average thread length}
-Explain what is what. Explain what participating only means.
+In this section, we compare several measures of average thread length 
+In this section, we introduce and compare several measures of average thread length, as outlined in [TABLE].  The ``absolute'' metric includes all threads, without taking into account the bounce rate of the sample. In contrast, the ``existing only'' metric excludes threads with undeliverable messages. This metric is more representative of the overall performance of our system. Lastly, the ``participating only'' metric excludes threads that lack a response from a scammer. This metric can be thought of as a proxy measure of how engaging our responses are. We also provide a baseline human performance for comparison, as described in our experiment in [SECTION, Background]. It is important to note that the baseline should be used with care, as it stems from a different sample.
 
 \begin{center}
 \scalebox{0.85}{
 \begin{tabular}{l c c}
   \hline
-  \textbf{Measure} & \textbf{Score} & \textbf{Avg. \# words} \\
+  \textbf{Measure} & \textbf{Score} \\
   \hline
   Absolute avg. thread length & 3.80 \\
-  Avg. thread lenght, existing only & 4.75 \\
+  Avg. thread length, existing only & 4.75 \\
   Avg. thread length, participating only & 6.20 \\
   Human respondent, participating only* & 7.40 \\
   \hline
@@ -152,6 +153,8 @@ Explain what is what. Explain what participating only means.
 \end{center}
 
 \subsection{Distribution by class}
+
+
 % add graph
 % consider adding avg words per class
 \begin{center}
@@ -188,32 +191,10 @@ Mystery shopper & 1 & 875.00 \\ \hline
 \end{center}
 
 
-{'church_and_charity': 3, 'next_of_kin': 45, 'lottery': 41, 'fake_cheques': 4, 'business': 41, 'dying_people': 9, 'orphans': 3, 'government': 18, 'misc': 18, 'romance': 56, 'banking': 7, 'compensation': 2, 'delivery_company': 14, 'commodities': 4, 'mystery_shopper': 1, 'western_union_and_moneygram': 7, 'loans': 61, 'atm_card': 7, 'widow': 7}
+% {'church_and_charity': 3, 'next_of_kin': 45, 'lottery': 41, 'fake_cheques': 4, 'business': 41, 'dying_people': 9, 'orphans': 3, 'government': 18, 'misc': 18, 'romance': 56, 'banking': 7, 'compensation': 2, 'delivery_company': 14, 'commodities': 4, 'mystery_shopper': 1, 'western_union_and_moneygram': 7, 'loans': 61, 'atm_card': 7, 'widow': 7}
 
-a 10-day period from a virtual private server ([SECTION environemtn]). Over the course 
+% 348 scam instances, 19 classes, 45 supported scam instances
 
-	3. Conversation results
-		i. Methodology 3 samples. sample 1 organic from the client. sample 2, random subset of 
-		0. Setup. 10-days. 348 + 45. Another sample where we manually responded to 20 messages. Say time is limited.
-		i. Bounce rate
-			- bounce rate for thread
-			- bounce rate for baseline
-		ii. Participation rate
-			- braindead rate
-			- test sample
-			- other sample
-		iv. Distribution of scam
-
-
-348 scam instances, 19 classes, 45 supported scam instances
-
-
-
-		v.  Average thread length, words per thread
-			- inclusive of all
-			- existing emails
-			- answered emails
-			- human-sized sample 35/5 = 6.8
 
 11
 4
@@ -235,38 +216,3 @@ a 10-day period from a virtual private server ([SECTION environemtn]). Over the 
 6
 4
 4
-
-
-
-Possible other measures: In addition to average thread length, average number of words in thread? If it's easy to remove quoting etc., average % of first message replied to, histogram of thread length, average thread length by spam type ???
-
-
-
-
-
-
-This chapter contains the evaluation 
-
-
-
-design and all probabilistic classification tasks. In 
-
-In addition, we also present results from all probabilistic classification tasks.
-
-some intermediate results from 
-
-the evaluation of the performance of our system, as well as 
-
-
-This chapter contains the evaluation of the methods proposed in the previous
-part, chapter 4. In section 5.1, we present the data sets and the methodology
-used for testing. We give details about the parameter choices and set baseline
-scores obtained by either classical NCA or simple linear projections, such as PCA,
-LDA or RCA. Results for each individual method are presented in sections 5.3
-and 5.4. A comparison of the methods is shown in subsection 5.3.4 using accuracy
-versus time plots.
-We should mention that we did not include all the results in this chapter to
-prevent cluttering. Further experimentations can be found in appendix B
-
-This chapter details the functionality and implementation of the response generation component. As emphasized in sections [SECTION], [SECTION], response generation depends on the outputs of the information extraction, classification, and identity generation components. 
-
