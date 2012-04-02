@@ -5,23 +5,13 @@ unsolicited email, in which the scammer attempts to extract large sums of money
 from a target using various social engineering techniques. Because these messages
 often resemble legitimate correspondence, they are often omitted by modern spam filters.
 
-We use a 
-In the implementation of our system
+We structure our prototype system in five major components -- collection, information extraction, classification, identity generation, response generation.
+These components are designed to fully automate the processing cycle of AFF messages -- from obtaining an AFF instance to sending a reply, and employ
+a relatively wide range of techniques. Some of these include crawlers, parsers, discriminative classifiers, pattern matching rules and hierarchical finite state machines,
+but we provide a better overview of how they fit together in [CHAPTER].
 
+In parallel, we introduce the 419 corpus -- a corpus of 32,000 labelled AFF messages spanning 22 categories [SECTION]. 
+We believe this corpus can be useful for further research into advance fee fraud, as well as to develop better statistical spam filters.
 
-
-For our implementation, we develop five components which allow us to fully automate
-the processing cycle of AFF messages -- collection, information extraction, classification, 
-identity generation and response generation. The collection component provides functionality
-to obtain new AFF instances and replies to current conversation threads (SECTION). The 
-information extraction component obtains useful information from incoming messages -- named entities, headers, relationships (SECTION).
-Classification determines the AFF variation in play using a Maximum Entropy model (SECTION). 
-Identity generation provides our agent with a consistent persona -- e.g., name, age, occupation, etc. Finally, 
-the response generation component 
-
-new AFF instances
-
-
-The collection component provides functionality 
-to obtainnew AFF instances, as well as replies to current conversaion threads ([SECTION]). The 
-information extraction component}
+Lastly, we evaluate the performance of the prototype system over a 10-day operation period. At the end of the experiment, we observe a participation rate of 58% and average thread length of 6.20 messages, compared with 70% and 7.40 messages for human baseline performance. These results suggest that while the agent can successfully maintain conversations spanning multiple exchanges, it is not as convincing as human participants. Nevertheless, it is important to remember the main advantage of our approach lies in its scalability -- the agent can maintain a very large number of conversations concurrently, whilst human ability is very limtied in that regard [SECTION].
+}
