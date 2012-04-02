@@ -8,8 +8,8 @@ Throughout this chapter, for the sake of clarity and brevity, we use the followi
 \item[Macro F$_{1}$] The value is the result of averaging the F$_{1}$ scores for all classes.
 \item[Micro F$_{1}$] The value represents a global calculation of F$_{1}$, regardless of class.
 \item[Thread] Each thread is defined as a logical unit of all messages related to a single instance of a scam. Threads are proportional and contain messages from both the agent and the scammer.
-\item[$\mathbf B_{rate}$] This is a measure of the bounce rate of our sample. It is defined as all threads containing messages that cannot be delivered (due to deleted email boxes, exceeded quota, etc.) over the total number of threads.
-\item[$\mathbf P_{rate}$] This is a measure of the participation rate of our sample. It is defined as all threads that contain at least one reply from a scammer, over the total number of threads in the sample (excluding bounced threads).
+\item[Bounce rate] This measure is defined as the ratio of all threads containing undeliverable messages (due to deleted email boxes, exceeded quota, etc.) over the total number of threads in the sample.
+\item[Participation rate] This measure is defined as the ratio of threads that contain at least one reply from a scammer over the total number of threads in the sample (excluding bounced threads).
 \item[Other abbreviations] For brevity, in some tables we use the abbreviations \textit{TP, FN, FP, TN} to mean, respectively, \textit{True Positive, False Negative, False Positive, True Negative}.
 \end{description}
 
@@ -20,33 +20,33 @@ The intermediate results presented in this section measure the performance of pr
 The scam variation classifier is trained on a classical 80:20 split of data from the 419 corpus. Our model achieves Macro F$_{1} = 0.81177$ and Micro F$_{1}= 0.77134$ on the $5,996$ data points in the validation set. A breakdown of the results is shown in [FIGURE].
 \begin{center}
 \scalebox{0.85}{
-\begin{tabular}{| l*{6}{c}c |}
+\begin{tabular}{ l*{6}{c}c }
 \hline
 \textbf{Class} & \textbf{TP} & \textbf{FN} & \textbf{FP} & \textbf{TN} & \textbf{Precision} & \textbf{Recall} & \textbf{F$_{1}$} \\ \hline
-ATM card & 106 & 50 & 55 & 5755 & 0.658 & 0.679 & 0.669 \\ \hline
-Employment & 35 & 22 & 17 & 5892 & 0.673 & 0.614 & 0.642 \\ \hline
-Next of kin & 962 & 98 & 99 & 4807 & 0.907 & 0.908 & 0.907 \\ \hline
-Banking & 206 & 132 & 146 & 5482 & 0.585 & 0.609 & 0.597 \\ \hline
-Fake cheques & 233 & 31 & 30 & 5672 & 0.886 & 0.883 & 0.884 \\ \hline
-Orphans & 153 & 60 & 55 & 5698 & 0.736 & 0.718 & 0.727 \\ \hline
-Business & 287 & 211 & 234 & 5234 & 0.551 & 0.576 & 0.563 \\ \hline
-Government & 552 & 137 & 122 & 5155 & 0.819 & 0.801 & 0.810 \\ \hline
-Refugees & 51 & 36 & 29 & 5850 & 0.638 & 0.586 & 0.611 \\ \hline
-Church \& Charity & 79 & 26 & 15 & 5846 & 0.840 & 0.752 & 0.794 \\ \hline
-Loans & 253 & 10 & 10 & 5693 & 0.962 & 0.962 & 0.962 \\ \hline
-Romance & 134 & 14 & 26 & 5792 & 0.838 & 0.905 & 0.870 \\ \hline
-Commodities & 35 & 18 & 11 & 5902 & 0.761 & 0.660 & 0.707 \\ \hline
-Lottery & 801 & 30 & 53 & 5082 & 0.938 & 0.964 & 0.951 \\ \hline
-WU \& MoneyGram & 92 & 23 & 31 & 5820 & 0.748 & 0.800 & 0.773 \\ \hline
-Compensation & 275 & 60 & 70 & 5561 & 0.797 & 0.821 & 0.809 \\ \hline
-Military & 77 & 9 & 6 & 5874 & 0.928 & 0.895 & 0.911 \\ \hline
-Widow & 55 & 61 & 36 & 5814 & 0.604 & 0.474 & 0.531 \\ \hline
-Delivery company & 50 & 26 & 17 & 5873 & 0.746 & 0.658 & 0.699 \\ \hline
-Misc & 82 & 41 & 34 & 5809 & 0.707 & 0.667 & 0.686 \\ \hline
-Dying people & 270 & 24 & 25 & 5647 & 0.915 & 0.918 & 0.917 \\ \hline
+ATM card & 106 & 50 & 55 & 5755 & 0.658 & 0.679 & 0.669 \\ 
+Employment & 35 & 22 & 17 & 5892 & 0.673 & 0.614 & 0.642 \\ 
+Next of kin & 962 & 98 & 99 & 4807 & 0.907 & 0.908 & 0.907 \\ 
+Banking & 206 & 132 & 146 & 5482 & 0.585 & 0.609 & 0.597 \\ 
+Fake cheques & 233 & 31 & 30 & 5672 & 0.886 & 0.883 & 0.884 \\ 
+Orphans & 153 & 60 & 55 & 5698 & 0.736 & 0.718 & 0.727 \\ 
+Business & 287 & 211 & 234 & 5234 & 0.551 & 0.576 & 0.563 \\ 
+Government & 552 & 137 & 122 & 5155 & 0.819 & 0.801 & 0.810 \\ 
+Refugees & 51 & 36 & 29 & 5850 & 0.638 & 0.586 & 0.611 \\ 
+Church \& Charity & 79 & 26 & 15 & 5846 & 0.840 & 0.752 & 0.794 \\ 
+Loans & 253 & 10 & 10 & 5693 & 0.962 & 0.962 & 0.962 \\ 
+Romance & 134 & 14 & 26 & 5792 & 0.838 & 0.905 & 0.870 \\ 
+Commodities & 35 & 18 & 11 & 5902 & 0.761 & 0.660 & 0.707 \\ 
+Lottery & 801 & 30 & 53 & 5082 & 0.938 & 0.964 & 0.951 \\ 
+WU \& MoneyGram & 92 & 23 & 31 & 5820 & 0.748 & 0.800 & 0.773 \\ 
+Compensation & 275 & 60 & 70 & 5561 & 0.797 & 0.821 & 0.809 \\ 
+Military & 77 & 9 & 6 & 5874 & 0.928 & 0.895 & 0.911 \\ 
+Widow & 55 & 61 & 36 & 5814 & 0.604 & 0.474 & 0.531 \\ 
+Delivery company & 50 & 26 & 17 & 5873 & 0.746 & 0.658 & 0.699 \\ 
+Misc & 82 & 41 & 34 & 5809 & 0.707 & 0.667 & 0.686 \\ 
+Dying people & 270 & 24 & 25 & 5647 & 0.915 & 0.918 & 0.917 \\ 
 Mystery shopper & 55 & 4 & 2 & 5905 & 0.965 & 0.932 & 0.948 \\ \hline
-\multicolumn{8}{ |r| }{\textbf{Macro F$_{1}$: 0.81177}} \\ \hline
-\multicolumn{8}{ |r| }{\textbf{Micro F$_{1}$: 0.77134}} \\ \hline
+\multicolumn{8}{ r }{\textbf{Macro F$_{1}$: 0.81177}} \\ 
+\multicolumn{8}{ r }{\textbf{Micro F$_{1}$: 0.77134}} \\ \hline
 \end{tabular}
 }
 \end{center}
@@ -55,13 +55,13 @@ Mystery shopper & 55 & 4 & 2 & 5905 & 0.965 & 0.932 & 0.948 \\ \hline
 We evaluate the performance of the personal questions (PQ) classifier using 2-fold cross-validation on a set of 500 email messages. The averaged results are shown in [TABLE]. Note that since this is a binary classifier, the first two table rows are reciprocal.
 \begin{center}
 \scalebox{0.85}{
-\begin{tabular}{| l*{6}{c}c |}
+\begin{tabular}{ l*{6}{c}c }
 \hline 
 \textbf{Class} & \textbf{TP} & \textbf{FN} & \textbf{FP} & \textbf{TN} & \textbf{Precision} & \textbf{Recall} & \textbf{F$_{1}$} \\ \hline
-PQ & 96 & 26 & 7 & 121 & 0.932 & 0.787 & 0.853 \\ \hline
+PQ & 96 & 26 & 7 & 121 & 0.932 & 0.787 & 0.853 \\ 
 No PQ & 121 & 7 & 26 & 96 & 0.823 & 0.945 & 0.880 \\ \hline
-\multicolumn{8}{ |r| }{\textbf{Macro F$_{1}$: 0.86800}} \\ \hline
-\multicolumn{8}{ |r| }{\textbf{Micro F$_{1}$: 0.86667}} \\ \hline
+\multicolumn{8}{ r }{\textbf{Macro F$_{1}$: 0.86800}} \\ 
+\multicolumn{8}{ r }{\textbf{Micro F$_{1}$: 0.86667}} \\ \hline
 \end{tabular}
 }
 \end{center}
@@ -69,7 +69,7 @@ No PQ & 121 & 7 & 26 & 96 & 0.823 & 0.945 & 0.880 \\ \hline
 As described in [SECTION], we use a CRF classifier with a pre-trained model on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this section, we measure the model's performance on a validation set of 50 manually labelled messages (18655 words) from the 419 corpus. Whilst the sample is comparatively small, our time is limited and the model is already reported to achieve F$_{1} = 90.36$ for the \emph{Persons} class on the CoNNL 2003 dataset (see [SECTION]). The results are summarized in [TABLE]. Note that we do not include the \emph{Locations} and \emph{Organizations} classes, as they are not relevant to our use case.
 \begin{center}
 \scalebox{0.85}{
-\begin{tabular}{| l*{6}{c}c |}
+\begin{tabular}{ l*{6}{c}c }
 \hline 
 \textbf{Class} & \textbf{TP} & \textbf{FN} & \textbf{FP} & \textbf{TN} & \textbf{Precision} & \textbf{Recall} & \textbf{F$_{1}$} \\ \hline
 Persons & 354 & 85 & 31 & 18185 & 0.919 & 0.806 & 0.859 \\ \hline
@@ -98,9 +98,42 @@ To measure the performance of our prototype system, we deployed it on a virtual 
 }
 \end{center}
 
-\subsection{Bouce rate}
-We m
+% Consider merge, once you figure out how to do figures.
+\subsection{Bounce rate}
+We compare the bounce rate of our system with a baseline metric obtained by replying with a blank email to 100 messages in the set of scam instances. The results are summarized in [TABLE] and indicate that over 20\% of advance fee fraud scammers' accounts are quickly detected and removed by email providers.
 
+\begin{center}
+\scalebox{0.85}{
+%\begin{tabular}{|l c|}
+\begin{tabular}{l c}
+  \hline
+ \multicolumn{2}{r}{\textbf{Bounce rate}} \\
+  \hline
+  System & 0.20 \\ %\hline
+  Baseline & 0.23 \\ 
+  \hline
+\end{tabular}
+}
+\end{center}
+
+\subsection{Participation rate}
+We compare the participation rate [SECTION] achieved by our system with two baseline metrics. The first metric measures the participation rate for human respondents with a random sample of 20 threads. Whilst the sample is small, our time is limited and composing replies to scammers is very time consuming. A second metric measures the participation rate for a ``disabled'' system, i.e., a system which simply replies with ``\textit{I am interested, please send me more information}'', for the full sample of 45 threads.  The results are presented in [TABLE] and indicate that more sophisticated responses yield better participation rates, yet -- interestingly -- some scammers also respond to completely depersonalized emails.
+
+\begin{center}
+\scalebox{0.85}{
+\begin{tabular}{l c}
+  \hline
+ \multicolumn{2}{r}{\textbf{Participation rate}} \\
+  \hline
+  Human respondent & 0.70 \\
+  System & 0.58 \\ %\hline
+  ``Disabled'' system & 0.22 \\ 
+  \hline
+\end{tabular}
+}
+\end{center}
+ 
+\subsection{Average thread length}
 
 a 10-day period from a virtual private server ([SECTION environemtn]). Over the course 
 
@@ -127,6 +160,28 @@ a 10-day period from a virtual private server ([SECTION environemtn]). Over the 
 			- existing emails
 			- answered emails
 			- human-sized sample 35/5 = 6.8
+
+11
+4
+4
+6
+12
+4
+6
+6
+6
+4
+12
+10
+8
+3
+4
+4
+6
+6
+4
+4
+
 
 
 Possible other measures: In addition to average thread length, average number of words in thread? If it's easy to remove quoting etc., average % of first message replied to, histogram of thread length, average thread length by spam type ???
