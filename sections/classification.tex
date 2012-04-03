@@ -14,12 +14,12 @@ In this section we introduce the 419 corpus -- a collection of $32,000$ advance 
 	\item Scam class -- e.g. \emph{Lottery}, \emph{Romance}, etc. See table [TABLE].
 \end{itemize}
 
-The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in [CHAPTER], we have discarded over $11,000$ malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents 25.6\% of the original data. In addition, we have grouped similar categories together (e.g., \textit{Romance scam} and \textit{Russian romance scam}) and reduced the number of possible classes from 31 to 22. Because the data has been labelled by third parties -- the moderators and users of antifraudintl.org, we have randomly sampled 380 messages to measure the labelling error rate. We define this rate as the percentage of email messages assigned a wrong class over the total number of messages in the sample. With 95\% confidence, we estimate a 0.79\% labelling error rate in the data. Whilst this is not insignificant, given the total size of the corpus, it is unlikely that classification accuracy will be significantly degraded due to the error rate. 
+The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in [CHAPTER], we have discarded over $11,000$ malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents 25.6\% of the original data. In addition, we have grouped similar categories together (e.g., \textit{Romance scam} and \textit{Russian romance scam}) and reduced the number of possible classes from 31 to 22. Because the data has been labeled by third parties -- the moderators and users of antifraudintl.org, we have randomly sampled 380 messages to measure the labeling error rate. We define this rate as the percentage of email messages assigned a wrong class over the total number of messages in the sample. With 95\% confidence, we estimate a 0.79\% labeling error rate in the data. Whilst this is not insignificant, given the total size of the corpus, it is unlikely that classification accuracy will be significantly degraded due to the error rate. 
 
 32000
 922		Romance						263179
 870		ATM Card						546786
-638		Western Union \& Moneygram	204352
+638		Western Union \& MoneyGram	204352
 628		Misc							192875
 603		Widow
 555		Church and Charity
@@ -57,13 +57,13 @@ Optimal feature selection for supervised learning problems is a challenging task
 % Features
 	Scam variation classifier
 	- N(-)Grams (length 1--4)
-	- Prefix and Suffix NGrams
+	- Prefix and Suffix n-grams
 	- lowercase words
-	- lowercase ngrams
+	- lowercase n-grams
 	PQ classifier:
 	- lowercase words
-	- use ngrams - yes
-	- no prefix or suffix ngrams
+	- use n-grams - yes
+	- no prefix or suffix n-grams
 
 \subsection{Training the classifiers}
 

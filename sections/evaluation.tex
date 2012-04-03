@@ -1,5 +1,5 @@
 \chapter{Evaluation}
-T\his chapter contrains the evaluation of our prototype system. In [SECTION .1] we define the terminology we use in our results. [SECTION 1.2] focuses on intermediate results, i.e., results of various probabilistic tasks. Finally, we provide a discussion on the meaning of these results.
+T\his chapter contains the evaluation of our prototype system. In [SECTION .1] we define the terminology we use in our results. [SECTION 1.2] focuses on intermediate results, i.e., results of various probabilistic tasks. Finally, we provide a discussion on the meaning of these results.
 
 \section{Terminology}
 Throughout this chapter, for the sake of clarity and brevity, we use the following terminology to present our results.
@@ -66,7 +66,7 @@ No PQ & 121 & 7 & 26 & 96 & 0.823 & 0.945 & 0.880 \\ \hline
 }
 \end{center}
 \subsection{Named-entity recognition classifier}
-As described in [SECTION], we use a CRF classifier with a pre-trained model on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this section, we measure the model's performance on a validation set of 50 manually labelled messages (18655 words) from the 419 corpus. Whilst the sample is comparatively small, our time is limited and the model is already reported to achieve F$_{1} = 90.36$ for the \emph{Persons} class on the CoNNL 2003 dataset (see [SECTION]). The results are summarized in [TABLE]. Note that we do not include the \emph{Locations} and \emph{Organizations} classes, as they are not relevant to our use case.
+As described in [SECTION], we use a CRF classifier with a pre-trained model on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this section, we measure the model's performance on a validation set of 50 manually labeled messages (18655 words) from the 419 corpus. Whilst the sample is comparatively small, our time is limited and the model is already reported to achieve F$_{1} = 90.36$ for the \emph{Persons} class on the CoNNL 2003 dataset (see [SECTION]). The results are summarized in [TABLE]. Note that we do not include the \emph{Locations} and \emph{Organizations} classes, as they are not relevant to our use case.
 \begin{center}
 \scalebox{0.85}{
 \begin{tabular}{ l*{6}{c}c }
