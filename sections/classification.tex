@@ -1,6 +1,5 @@
 \chapter{Classification}
-
-% What this chapter is about
+In this chapter we detail the implementation of the classification component. We start with a brief overview of our usage case in Section 6.1. In Section 6.2 we introduce the 419 corpus -- an extensive collection of advance fee fraud messages. Lastly, in Section 6.3 we develop two Maximum Entropy models for classifying AFF messages.
 
 \section{Overview}
 The classification component serves two purposes. First, it provides a Python wrapper interface to an instance of the Stanford Classifier [REF] -- a Java implementation of a Maximum Entropy classifier. Second, it provides two trained models to solve text categorization problems. The first model -- the scam variation classifier -- helps us place an incoming message in one of 22 recognized classes of advance fee fraud scams. The second model -- the PQ classifier -- is a binary classifier that recognizes instances of personal questions in the body of a message. Both classifiers are trained on a corpus of AFF messages we have constructed specifically for this project. Their outputs are used to generate relevant responses, as shown in [CHAPTER].
@@ -47,6 +46,7 @@ Dying people & 1,625 & 678,218  \\
 Mystery shopper & 389 & 133,377 \\ \hline
 \end{tabular}
 }
+\caption{Corpus statistics}
 \end{table} 
 
 \section{Methodology}
@@ -77,11 +77,11 @@ Optimal feature selection for supervised learning problems is a challenging task
   Lowercase n-grams & \ding{51} & -- \\ \hline
   \end{tabular}
   }
-   \caption{Feature selection for scam variation classifier and PQ classifier}
+   \caption{Feature selection: scam variation classifier vs. PQ classifier}
 \end{table}
 
 \subsection{Training the classifiers}
 
-We have trained both classifiers on data from the 419 corpus.  The scam variation classifier is trained on a 80% random sample of the corpus, obtained using the following procedure: $\forall k_{1,2...,22} \in S$, $T=$\{$80\% \times k_{1}, 80\% \times k_{2},..., 80\% \times k_{22}$\}, where $k_{n}$ represents each class, $S$ is the set of messages in the corpus and $T$ is training set. The PQ classifier is trained using a similar procedure, except our training and validation sets are smaller -- 500 manually labelled messages.
+We have trained both classifiers on data from the 419 corpus.  The scam variation classifier is trained on a 80\% random sample of the corpus, obtained using the following procedure: $\forall k_{1,2...,22} \in S$, $T=$\{$80\% \times k_{1}, 80\% \times k_{2},..., 80\% \times k_{22}$\}, where $k_{n}$ represents each class, $S$ is the set of messages in the corpus and $T$ is training set. The PQ classifier is trained using a similar procedure, except our training and validation sets are smaller -- 500 manually labelled messages.
 
 In order to estimate the performance of our predictive models, we have performed cross-validation. The methodology and results are presented in [CHAPTER, SECTION].

@@ -38,17 +38,24 @@ Named-entity recognition (NER) is an information extraction task which seeks to 
 
 One example is the Stanford Named Entity Recognizer [REF]. It is a Java implementation of a linear chain Conditional Random Field (CRF) classifier [REF, REF] and comes with large pre-trained models on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this project we are specifically interested in the provided 3 class model, as it is reported to have a F$_{1}$ score of 90.36 for the \emph{Persons} class on the CoNNL 2003 dataset. Its features are presented in [TABLE]:
 
-[PLACEHOLDER FOR BIG TABLE]
-% Current word
-% Previous word
-% Next word
-% Current word character n-gram
-% Current POS tag
-% Surrounding POS Tag Sequence
-% Current Word Shape
-% Surrounding Word Shape Sequence
-% Presence of Word in Left Window (size 4)
-% Presence of Word in Right Window (size 4)
+\begin{table}[h]
+  \centering
+   \scalebox{0.85}{
+  \begin{tabular}{l}
+  \hline
+  \textbf{Feature} \\ \hline
+  Current word \\
+  Previous word \\
+  Next word \\
+  Current word char. n-gram \\
+  Current POS tag \\
+  Surrounding POS tag sequence \\
+  Presence of word in left window \\
+  Presence of word in right window \\ \hline
+  \end{tabular}
+  }
+   \caption{Features of Stanford NER 3 class model.}
+\end{table}
 
 Whilst the aforementioned entity corpora provide a robust coverage of the English language, we have also measured the performance of the model on AFF-specific emails on a small validation set. The results are available in [CHAPTER]. 
 

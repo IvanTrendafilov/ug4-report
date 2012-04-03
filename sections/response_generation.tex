@@ -12,11 +12,9 @@ The first step in generating a response to an incoming message is to determine w
 	
 This is a challenging problem. A na\"{\i}ve approach assumes that each conversation thread can contain at most two actors -- the agent and the scammer. Therefore, keeping track of the \emph{From} header is  sufficient to maintain conversation state. Another approach is to compute the thread with the largest word overlap for each incoming message. This is a better solution, but it makes the assumption that the message body always contains a quoted response. Due to the nature of AFF scams, this is also ineffective.
 
-We propose a bucketing algorithm which combines ideas from the aforementioned approaches with one important observation -- the scammer always notifies the target in advance when he is being transferred to a third party -- e.g. ``\textit{please contact the prize remittance manager, John Smith at john.smith@domain.com}''. Therefore, an effective way to keep track of threads is to keep track of the mentioned emails in each message. In order to do this, we attach a bucket to each thread that collects all email addresses. Once a new message comes in, we try to match it to a bucket. If successful, we update the bucket with any new email addresses. Otherwise, we create a new thread. This is illustrated by the pseudocode in [FIGURE].
+We propose a bucketing algorithm which combines ideas from the aforementioned approaches with one important observation -- the scammer always notifies the target in advance when he is being transferred to a third party -- e.g. ``\textit{please contact the prize remittance manager, John Smith at john.smith@domain.com}''. Therefore, an effective way to keep track of threads is to keep track of the mentioned emails in each message. In order to do this, we attach a bucket to each thread that collects all email addresses. Once a new message comes in, we try to match it to a bucket. If successful, we update the bucket with any new email addresses. Otherwise, we create a new thread.
 
-[FIGURE - pseudocode]
-
-Let us assume we have threads $T_{1}, T_{2}, T_{3}$ with corresponding buckets $B_{1}, B_{2}, B_{3}$, such that $B_{1} = $\{$E_{1}, E_{2}$\}, $B_{2} = $\{$E_{3}$\}, $B_{3} = $\{$E_{5}$\} where $E_{n}$ is an email address. Message $M_{1}$ enters the system with a candidate bucket $B_{c} = $\{$E_{3}, E_{6}$\}. Then, for $B_{n}$ in $B$, $\operatorname{arg\,max} \left|{B_{n} \cup B_{c}}\right| = $\{$1$\}. Therefore, we attach $M_{1}$ to $T_{2}$ and update $B_{2} \coloneqq B_{2} \cup B_{c}$. Message $M_{2}$ enters the system with a candidate bucket $B_{c} = $\{$E_{10}$\}. For $B_{n}$ in $B$, $\operatorname{arg\,max} \left|{B_{n} \cup B_{c}}\right| = $\{$0$\}. Therefore, we create a new thread $T_{4}$ with $B_{4} \coloneqq B_{c} \cup \emptyset$.
+For example, let us assume we have threads $T_{1}, T_{2}, T_{3}$ with corresponding buckets $B_{1}, B_{2}, B_{3}$, such that $B_{1} = $\{$E_{1}, E_{2}$\}, $B_{2} = $\{$E_{3}$\}, $B_{3} = $\{$E_{5}$\} where $E_{n}$ is an email address. Message $M_{1}$ enters the system with a candidate bucket $B_{c} = $\{$E_{3}, E_{6}$\}. Then, for $B_{n}$ in $B$, $\operatorname{arg\,max} \left|{B_{n} \cup B_{c}}\right| = $\{$1$\}. Therefore, we attach $M_{1}$ to $T_{2}$ and update $B_{2} \coloneqq B_{2} \cup B_{c}$. Message $M_{2}$ enters the system with a candidate bucket $B_{c} = $\{$E_{10}$\}. For $B_{n}$ in $B$, $\operatorname{arg\,max} \left|{B_{n} \cup B_{c}}\right| = $\{$0$\}. Therefore, we create a new thread $T_{4}$ with $B_{4} \coloneqq B_{c} \cup \emptyset$.
 
 \section{Strategies}
 The agent employs a set of strategies designed to occupy the scammer for as long as possible. These strategies can be divided into two categories -- cooperative and non-cooperative. Cooperative strategies are mainly used to gain the scammer's confidence and are fulfilled by responding positively to requests. Non-cooperative strategies are used throughout each conversation thread and aim to deflect questions, drive the conversation to a different topic, or elicit extra work from the scammer.
@@ -60,33 +58,47 @@ Further to adding context, text snippets also provide variability to the generat
 
 Several layers of FSMs and PFSMs determine how each response is generated. We start by looking at the top-level FSM. We move on to a simple PFSM used for generating greetings. Finally, we illustrate the PFSMs that generate the content body.
 
-The top-level FSM defines the high-level structure of our message -- a letter. The Greeting, Body and Signature states represent a set of PFSMs, whilst Quoted\_Text simply produces a quoted version of the incoming message. The FSM is illustrated below.
+The top-level FSM defines the high-level structure of our message -- a letter. The Greeting, Body and Signature states represent a set of PFSMs, whilst Quoted\_Text simply produces a quoted version of the incoming message. The FSM is illustrated in [FIGURE].
 
-\includegraphics[scale=0.80]{fsm-top-level.png}
+\begin{figure}[h]
+\centering
+\includegraphics{pics/top-level-fsm.png}
+\caption{The top-level FSM defines a letter structure for the message}
+\end{figure}
 
 The greeting generation automata is an example of a simple bottom-level PFSM. Its task is to accept the name of the scammer and produce a greeting, as illustrated in [FIGURE]. The transitions between the has\_name state and the text snippets have probability $p = \frac{1}{3}$.
 
-\includegraphics[scale=0.60]{pfsm-greeting.png}
+\begin{figure}[h]
+\centering
+\includegraphics{pics/greeting-fsm.png}
+\caption{The greeting generation PFSM}
+\end{figure}
 
-Figure 3 (missing) illustrates the PFSM which generates the content body of a message. It takes in as inputs the results of classifier, information extraction and identity generation tasks. Its main purpose is to select strategies and create placeholders for lower-level PFSMs. Strategies are selected based on the available information and conversation state. Please note, for clarify of the figure, we have omitted some of the notation.
-
-Figure (a) illustrates a lower-level FSM for the lottery scam variation. The scam is modelled by four distinct states. Figure (b) illustrates a bottom-level PFSM for the same scam, after a transition to the initial state.
-
+Figure 7.3 illustrates the PFSM which generates the content body of a message. It takes in as inputs the results of classifier, information extraction and identity generation tasks. Its main purpose is to select strategies and create placeholders for lower-level PFSMs. Strategies are selected based on the available information and conversation state. Please note, for clarify of the figure, we have omitted some of the notation.
 \begin{figure}
+\centering
+\includegraphics{pics/body-fsm-left.png}
+\caption{This PFSM determines which strategies to include in the body of the message.}
+\end{figure}
+
+Figure 7.4 (a) illustrates a lower-level FSM which models a lottery scam. The scam has four distinct states. Figure 7.4 (b) illustrates a bottom-level PFSM for the same scam, after a successful transition to the initial state.
+
+\begin{figure}[h]
   \centering
-  \subfloat[Lottery FSM]{\includegraphics[scale=0.50]{rules_lottery.png}}
+  \subfloat[Lottery scam model]{\includegraphics[scale=0.80]{pics/lottery-fsm.png}}
   ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc. (or a blank line to force the subfig onto a new line)
-  \subfloat[Snippet FSM]{\includegraphics[scale=0.50]{pfsm_text_snippet.png}}
+  \subfloat[Text snippet PFSM]{\includegraphics[scale=0.80]{pics/text_snippet_fsm.png}}
   ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc. (or a blank line to force the subfig onto a new line)
 %  \subfloat[A mouse]{\label{fig:mouse}\includegraphics[width=0.3\textwidth]{mouse}}
- % \caption{Pictures of animals}
+  \caption{A model of the lottery scam and text snippet selection for the \emph{Initial} state}
  % \label{fig:animals}
 \end{figure}
 
 We follow the same approach when modeling other scam variations and conversation strategies.
 
+\clearpage
 \subsection{An example message}
-In [FIGURE], we present a sample message annotated with colors.
+In Figure 7.5, we present a sample message annotated with colors.
 \begin{itemize}
 \item \textcolor{Red}{Red} denotes the outputs of the named-entity recognition and relation extraction tasks.
 \item \textcolor{Green}{Green} denotes that the classifier has determined this message is an instance of the \textit{Orphans} class. The response generation component has appropriately selected the \textit{Orphans} PFSM and generated these sentences.

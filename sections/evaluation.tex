@@ -18,7 +18,9 @@ The intermediate results presented in this section measure the performance of pr
 
 \subsection{Scam variation classifier}
 The scam variation classifier is trained on a classical 80:20 split of data from the 419 corpus. Our model achieves Macro F$_{1} = 0.81177$ and Micro F$_{1}= 0.77134$ on the $5,996$ data points in the validation set. A breakdown of the results is shown in [FIGURE].
-\begin{center}
+
+\begin{table}[h]
+  \centering
 \scalebox{0.85}{
 \begin{tabular}{ l*{6}{c}c }
 \hline
@@ -49,11 +51,13 @@ Mystery shopper & 55 & 4 & 2 & 5905 & 0.965 & 0.932 & 0.948 \\ \hline
 \multicolumn{8}{ r }{\textbf{Micro F$_{1}$: 0.77134}} \\ \hline
 \end{tabular}
 }
-\end{center}
+\caption{Scam variation classifier}
+\end{table}
 
 \subsection{PQ classifier}
 We evaluate the performance of the personal questions (PQ) classifier using 2-fold cross-validation on a set of 500 email messages. The averaged results are shown in [TABLE]. Note that since this is a binary classifier, the first two table rows are reciprocal.
-\begin{center}
+\begin{table}[h]
+  \centering
 \scalebox{0.85}{
 \begin{tabular}{ l*{6}{c}c }
 \hline 
@@ -64,25 +68,29 @@ No PQ & 121 & 7 & 26 & 96 & 0.823 & 0.945 & 0.880 \\ \hline
 \multicolumn{8}{ r }{\textbf{Micro F$_{1}$: 0.86667}} \\ \hline
 \end{tabular}
 }
-\end{center}
+\caption{PQ classifier}
+\end{table}
 \subsection{Named-entity recognition classifier}
 As described in [SECTION], we use a CRF classifier with a pre-trained model on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this section, we measure the model's performance on a validation set of 50 manually labeled messages (18655 words) from the 419 corpus. Whilst the sample is comparatively small, our time is limited and the model is already reported to achieve F$_{1} = 90.36$ for the \emph{Persons} class on the CoNNL 2003 dataset (see [SECTION]). The results are summarized in [TABLE]. Note that we do not include the \emph{Locations} and \emph{Organizations} classes, as they are not relevant to our use case.
-\begin{center}
+\begin{table}[h]
+  \centering
 \scalebox{0.85}{
 \begin{tabular}{ l*{6}{c}c }
 \hline 
 \textbf{Class} & \textbf{TP} & \textbf{FN} & \textbf{FP} & \textbf{TN} & \textbf{Precision} & \textbf{Recall} & \textbf{F$_{1}$} \\ \hline
 Persons & 354 & 85 & 31 & 18185 & 0.919 & 0.806 & 0.859 \\ \hline
 \end{tabular}
+\caption{Named-entity recognition CRF classifier}
 }
-\end{center}
+\end{table}
 
 \section{Conversation results}
 In this section we present results of the conversations our system has maintained with scammers. We begin by reviewing our methodology. In Sections [SECTION][SECTION], we describe a number of interesting statistics.
 \subsection{Methodology}
 To measure the performance of our prototype system, we deployed it on a virtual private server ([SECTION]) and let it run continuously from 19 March to 28 March. Over the 10-day period, the system gathered and processed 348 scam instances in 19 classes. Of the 348 instances, 45 were in the set of currently supported classes -- \textit{Lottery, Orphans, Mystery shopper}. We present detailed statistics from these conversation threads in [SECTION]. To put our results in context, we provide several baseline measures, depending on the purpose of the experiment. For example, to measure the bounce rate of threads, we draw random samples from the remaining set of scam instances, in order to compare it with the sample obtained by the system.
 
-\begin{center}
+\begin{table}[h]
+  \centering
 \scalebox{0.85}{
 %\begin{tabular}{|l c|}
 \begin{tabular}{l c}
@@ -95,16 +103,17 @@ To measure the performance of our prototype system, we deployed it on a virtual 
   Threads & 45 \\ 
   \hline
 \end{tabular}
+\caption{Experiment overview}
 }
-\end{center}
+\end{table}
 
 % Consider merge, once you figure out how to do figures.
 \subsection{Bounce rate}
 We compare the bounce rate of our system with a baseline metric obtained by replying with a blank email to 100 messages in the set of scam instances. The results are summarized in [TABLE] and indicate that over 20\% of advance fee fraud scammers' accounts are quickly detected and removed by email providers.
 
-\begin{center}
+\begin{table}[h]
+  \centering
 \scalebox{0.85}{
-%\begin{tabular}{|l c|}
 \begin{tabular}{l c}
   \hline
  \multicolumn{2}{r}{\textbf{Bounce rate}} \\
@@ -114,12 +123,14 @@ We compare the bounce rate of our system with a baseline metric obtained by repl
   \hline
 \end{tabular}
 }
-\end{center}
+\caption{Comparison of bounce rates}
+\end{table}
 
 \subsection{Participation rate}
 We compare the participation rate [SECTION] achieved by our system with two baseline metrics. The first metric measures the participation rate for human respondents with a random sample of 20 threads. Whilst the sample is small, our time is limited and composing replies to scammers is very time consuming. A second metric measures the participation rate for a ``disabled'' system, i.e., a system which simply replies with ``\textit{I am interested, please send me more information}'', for the full sample of 45 threads.  The results are presented in [TABLE] and indicate that more sophisticated responses yield better participation rates, yet -- interestingly -- some scammers also respond to completely depersonalized emails.
 
-\begin{center}
+\begin{table}[h]
+  \centering
 \scalebox{0.85}{
 \begin{tabular}{l c}
   \hline
@@ -131,15 +142,17 @@ We compare the participation rate [SECTION] achieved by our system with two base
   \hline
 \end{tabular}
 }
-\end{center}
+\caption{Comparison of participation rates}
+\end{table}
  
 \subsection{Average thread length}
 We introduce and compare several measures of average thread length, as outlined in [TABLE].  The ``absolute'' metric includes all threads, without taking into account the bounce rate of the sample. In contrast, the ``existing only'' metric excludes threads with undeliverable messages. This metric is more representative of the overall performance of our system. Lastly, the ``participating only'' metric excludes threads that lack a response from a scammer. This metric can be thought of as a proxy measure of how engaging our responses are. We also provide a baseline human performance for comparison, as described in our experiment in [SECTION, Background]. It is important to note that the baseline should be used with care, as it stems from a different sample.
 
 TODO: Histogram here
 
-\begin{center}
-\scalebox{0.85}{
+\begin{table}[h]
+  \centering
+  \scalebox{0.85}{
 \begin{tabular}{l c}
   \hline
   \textbf{Measure} & \textbf{Score} \\
@@ -151,14 +164,15 @@ TODO: Histogram here
   \hline
 \end{tabular}
 }
-\end{center}
+\caption{Comparison of average thread length}
+\end{table}
 
 \subsection{Distribution by class}
 [Figure] shows the distribution of incoming scam instances over the 10-day period. The five most common classes are: \textit{Loans, Romance, Next of kin, Lottery, Business}.
 
-% add graph
-\begin{center}
-\scalebox{0.85}{
+\begin{table}[h]
+  \centering
+  \scalebox{0.85}{
 \begin{tabular}{l c c}
   \hline
   \textbf{\textbf{Class}} & \textbf{\# encounters} & \textbf{Average \# words} \\
@@ -187,34 +201,8 @@ Dying people & 9 & 475.11 \\
 Mystery shopper & 1 & 875.00 \\ \hline
 \end{tabular}
 }
-\end{center}
-
-
-% {'church_and_charity': 3, 'next_of_kin': 45, 'lottery': 41, 'fake_cheques': 4, 'business': 41, 'dying_people': 9, 'orphans': 3, 'government': 18, 'misc': 18, 'romance': 56, 'banking': 7, 'compensation': 2, 'delivery_company': 14, 'commodities': 4, 'mystery_shopper': 1, 'western_union_and_moneygram': 7, 'loans': 61, 'atm_card': 7, 'widow': 7}
-
-% 348 scam instances, 19 classes, 45 supported scam instances
-
-
-11
-4
-4
-6
-12
-4
-6
-6
-6
-4
-12
-10
-8
-3
-4
-4
-6
-6
-4
-4
+\caption{Distribution of incoming messages by class}
+\end{table}
 
 \section{Discussion}
 In this chapter we presented a number of interesting statistics which capture the performance of our prototype system. Our results demonstrate it is possible to build a fully automated system

@@ -1,5 +1,5 @@
-1) Figure of system
-2) Figure of collectors
+1) Figure of system - da
+2) Figure of collectors - ne
 3) Collectors -> Collection na vsqkude. sushto taka, proof read to make sure it makes sense.
 4) big features table for named-entity recognition
 5) table of features
@@ -12,3 +12,14 @@
 Collection component
 Collector modules
 
+
+1) Opravi problemite s collectors / collection
+2) Do-opravi labels na vsichki figuri
+3) sloji histogramata. i.e. psevdo histogramata
+4) opravi abstrakta
+5) opravi arch overview, kudeto govorim gluposti
+6) opravi all the links
+7) sloji references
+8) proof read
+9) spell check.
+10) Fix the hierarchical chapter, as per Charles' suggestion
