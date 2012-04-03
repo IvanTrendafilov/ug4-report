@@ -1,4 +1,49 @@
 \chapter{Conclusions}
+This report presented our approach to building a conversational agent for email correspondence with advance fee fraud scammers.
+We established the context of the problem and outlined our rationale in Section 1.2 and Chapter 2. In Section 3.1 we provided an
+overview of the architecture of the proposed system. In our implementation we encountered a number of interesting challenges.
+We summarize here our main contributions.
+\begin{description}
+\item[Section 4.2] We introduced a set of collector modules which automate the process of obtaining new scam instances and fetching replies to existing conversation threads.
+\item[Section 5.2] This section described key information extraction techniques. We detailed our approach to dealing with dirty data, header extraction from non-compliant emails, named-entity recognition, and relation extraction using bigrams and proximity search.
+\item[Section 6.2] This section introduced the 419 corpus -- a corpus containing 32,000 advance fee fraund emails in 22 categories.
+\item[Section 6.3] MaxEnt. Mention F1 scores.
+\item[Section 7.2] bucketing algorithm
+\item[Section 7.3] strategies
+\item[Section 7.4] response generation
 
-This chapter details the functionality and implementation of the response generation component. As emphasized in sections [SECTION], [SECTION], response generation depends on the outputs of the information extraction, classification, and identity generation components. 
+In this section we trained two Maximum Entropy classifiers using data from the 419 corpus. The 
 
+We implement a set of Maximum Entropy classifiers 
+
+We develop techniques for dealing with dirty incoming data and header extraction. In addition, we describe our approach to named-entity recognition and relation extraction using bigrams and proximity search.
+
+
+We also outline our approach to named-entity recognition and relation extraction -- 
+
+, header extraction from standard-
+
+
+The F$_{1}$ score (also F-measure) is the harmonic mean of precision ($p$) and recall $(r)$, as defined by the formula: F$_{1} = \frac{2rp}{r + p}$.
+\end{description}	
+
+
+This report presented our approach to building a conversational agent to sustain correspondence with advance fee fraud scammers over email.
+We established the context of the problem and outlined our rationale in Section 1.2 and Chapter 2.
+
+In this report we presented
+
+This report presented our approach to building a conversational agent to sustain correspondence with advance fee fraud scammers over email.
+
+
+
+This thesis presented our approach to fast low-rank metric learning. The need for
+a low rank metric was motivated in the context of kNN (chapter 1 and section 2.1),
+but we argue that learning a metric is useful whenever our algorithm relies on
+dissimilarities. Our eorts were directed towards the already established method,
+neighbourhood component analysis (NCA; section 3.1). We introduced a family
+of algorithms to mitigate NCA's main drawback | the computational cost. In
+our attempt of speeding up NCA, we encountered other interesting theoretical
+and practical challenges. The answers to these issues represent an important part
+of the thesis (sections 3.2 and 3.3). We summarize here our main contributions
+and present the conclusions
