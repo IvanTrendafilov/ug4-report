@@ -134,32 +134,34 @@ We compare the participation rate [SECTION] achieved by our system with two base
 \end{center}
  
 \subsection{Average thread length}
-In this section we introduce and compare several measures of average thread length, as outlined in [TABLE].  The ``absolute'' metric includes all threads, without taking into account the bounce rate of the sample. In contrast, the ``existing only'' metric excludes threads with undeliverable messages. This metric is more representative of the overall performance of our system. Lastly, the ``participating only'' metric excludes threads that lack a response from a scammer. This metric can be thought of as a proxy measure of how engaging our responses are. We also provide a baseline human performance for comparison, as described in our experiment in [SECTION, Background]. It is important to note that the baseline should be used with care, as it stems from a different sample.
+We introduce and compare several measures of average thread length, as outlined in [TABLE].  The ``absolute'' metric includes all threads, without taking into account the bounce rate of the sample. In contrast, the ``existing only'' metric excludes threads with undeliverable messages. This metric is more representative of the overall performance of our system. Lastly, the ``participating only'' metric excludes threads that lack a response from a scammer. This metric can be thought of as a proxy measure of how engaging our responses are. We also provide a baseline human performance for comparison, as described in our experiment in [SECTION, Background]. It is important to note that the baseline should be used with care, as it stems from a different sample.
+
+TODO: Histogram here
 
 \begin{center}
 \scalebox{0.85}{
-\begin{tabular}{l c c}
+\begin{tabular}{l c}
   \hline
-  \textbf{Measure} & \textbf{Score} & \textbf{Avg. \# words} \\
+  \textbf{Measure} & \textbf{Score} \\
   \hline
-  Absolute avg. thread length & 3.80 & 2145.58 \\
-  Avg. thread length, existing only & 4.75 & 2123.27 \\
-  Avg. thread length, participating only & 6.20 & 2179.77 \\
-  Human respondent, participating only* & 7.40 & 2253.10 \\
+  Absolute avg. thread length & 3.80 \\
+  Avg. thread length, existing only & 4.75 \\
+  Avg. thread length, participating only & 6.20 \\
+  Human respondent, participating only* & 7.40 \\
   \hline
 \end{tabular}
 }
 \end{center}
 
 \subsection{Distribution by class}
-
+[Figure] shows the distribution of incoming scam instances over the 10-day period. The five most common classes are: \texit{Loans, Romance, Next of kin, Lottery, Business}.
 
 % add graph
 \begin{center}
 \scalebox{0.85}{
 \begin{tabular}{l c c}
   \hline
-  \textbf{\textbf{Class}} & \textbf{\# encounters} & \textbf{Avg. \# words} \\
+  \textbf{\textbf{Class}} & \textbf{\# encounters} & \textbf{Avg. \# words in class} \\
   \hline
 ATM card & 7 & 605.86 \\ 
 Employment & 0 & -- \\ 
@@ -214,3 +216,9 @@ Mystery shopper & 1 & 875.00 \\ \hline
 6
 4
 4
+
+\section{Discussion}
+In this chapter we presented a number of interesting statistics which capture the performance of our prototype system. Our results demonstrate it is possible to build a fully automated system
+to maintain conversations with advance fee fraud scammers. Furthermore, [table participation] clearly shows that more sophisticated strategies yield better response rates. Nevertheless, [figure] and [figure] also indicate that human performance remains superior for these natural language tasks.
+
+It is important to remember that the main benefit of an automated system lies in its scalability. Our prototype system requires approximately 10 seconds to compose and transmit a reply. Assuming a constant stream of incoming messages, a single instance can handle up to 8,640 AFF messages a day -- far more than even the most dedicated scambaiter. Nevertheless, the question ``Can this solution scale in the real world?'' is a complicated one. It is not unreasonable to expect that scammers will eventually adapt and develop ways to discriminate between automatically generated replies and human replies. For example, the inclusion of a simple challenge-response mechanism may be one way of deterring automated responses -- e.g., ``Are you human?'' In turn, it is also possible to add new pattern matching rules to system to answer these questions. Ultimately, this is a technological arms race -- the success of our system is bounded by the sophistication of our natural language model and our ability to adapt it to new conditions. In spite of this, we believe a real world deployment of the proposed system has the potential to change the dynamics of advance fee fraud by discouraging some scammers and forcing others to innovate.
