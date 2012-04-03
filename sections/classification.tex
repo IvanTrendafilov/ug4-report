@@ -16,10 +16,42 @@ In this section we introduce the 419 corpus -- a collection of $32,000$ advance 
 
 The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in [CHAPTER], we have discarded over $11,000$ malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents 25.6\% of the original data. In addition, we have grouped similar categories together (e.g., \textit{Romance scam} and \textit{Russian romance scam}) and reduced the number of possible classes from 31 to 22. Because the data has been labeled by third parties -- the moderators and users of antifraudintl.org, we have randomly sampled 380 messages to measure the labeling error rate. We define this rate as the percentage of email messages assigned a wrong class over the total number of messages in the sample. With 95\% confidence, we estimate a 0.79\% labeling error rate in the data. Whilst this is not insignificant, given the total size of the corpus, it is unlikely that classification accuracy will be significantly degraded due to the error rate. 
 
+
+\begin{table}
+  \centering
+  \scalebox{0.85}{
+  \begin{tabular}{l c c}
+  \hline
+  \textbf{Class} & \textbf{\# messages} & \textbf{\# words} \\ \hline
+ATM card & 870 & 263,179 \\ 
+Employment & 382 & 133,559 \\ 
+Next of kin & 5,473 & 2,198,966 \\ 
+Banking & 1,779 & 546,786 \\ 
+Fake cheques & 1,608 & 563,013 \\ 
+Orphans & 1,104 & 499,176 \\ 
+Business & 2,615 & 695,869 \\ 
+Government & 3,659 & 1,442,339 \\ 
+Refugees & 444 & 247,884 \\ 
+Church \& Charity & 555 & 158,598 \\ 
+Loans & 1,582 & 246,788 \\ 
+Romance & 922 & 180,064 \\ 
+Commodities & 276 & 83,672 \\ 
+Lottery & 4,347 & 1,072,834 \\ 
+WU \& MoneyGram & 638 & 204,352 \\ 
+Compensation & 1,742 & 542,314 \\ 
+Military & 454 & 161,231 \\ 
+Widow & 603 & 246,870 \\ 
+Delivery company & 405 & 158,913 \\ 
+Misc & 628 & 192,875 \\ 
+Dying people & 1,625 & 678,218  \\ 
+Mystery shopper & 389 & 133,377 \\ \hline
+\end{tabular}
+}
+\end{table} 
+
 32000
 922		Romance						263179
-870		ATM Card						546786
-638		Western Union \& MoneyGram	204352
+638		WU \& MoneyGram	204352
 628		Misc							192875
 603		Widow
 555		Church and Charity

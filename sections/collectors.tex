@@ -1,11 +1,11 @@
-\chapter{Collector}
+\chapter{Collection}
 In this chapter we outline our system's mechanism for collecting new messages. We first set up the context and motivation of the problem. Then, we explore the implementation of our solution. Lastly, we describe three specific modules which implement the collection interface.
 
 \section{Motivation}
 
 The collector component provides the entry point for messages into the system. There are two parts to this problem. First of all, the component provides the required functionality to retrieve replies from all current conversation threads. Second, it also provides a mechanism to obtain new instances of the AFF scam and pass it to the conversational agent for further processing. Both mechanism ensure full automation, so no user interaction is required for system operation.
 
-The solution to the first problem is trivial -- it is briefly described in [SECTION]. In contrast, the problem of obtaining new AFF email messages is more unusual. One common approach is to plant a set of target email addresses in online guestbooks and forums of web sites with high PageRank score. These pages are frequently crawled by email harvester bots. The extracted email addresses are then added to spammers' mailing lists and eventually start receiving spam. Whilst this approach ensures a constant flow of new spam messages, it suffers from two major drawbacks. First of all, it requires manual entry, which is against our principle of full automation. Second, it attracts all types of spam, not advance fee fraud scams specifically. Instead, it is more effective for us to build our own crawler and scraper for AFF scams, as discussed in [SECTION].
+The solution to the first problem is trivial -- it is briefly described in [SECTION]. In contrast, the problem of obtaining new AFF email messages is more unusual. One common approach is to plant a set of target email addresses in online guestbooks and forums of web sites with high PageRank score. These pages are frequently crawled by email harvester bots. The extracted email addresses are then added to spammers' mailing lists and eventually start receiving spam. Whilst this approach ensures a constant flow of new spam messages, it suffers from two major drawbacks. First of all, it requires manual entry, which is against our principle of full automation. Second, it attracts all types of spam, not advance fee fraud scams specifically. Instead, it is more effective for us to build our own crawler and scraper for AFF scams ([SECTION]).
 
 % Implementation and protocol
 \section{Implementation}
@@ -23,9 +23,10 @@ For our prototype system, we have implemented three producer modules. These fall
 \subsection{419eater.com crawler}
 The 419eater.com crawler is an example of a producer which collects new scam instances from the aforementioned web site. 419eater.com is a popular online scam baiting community. Its members use a message board to exchange various information -- scammer names, techniques, etc. Most notably, the message board features a section titled: ``Surplus 419 scam letters'' which receives between 20--25 new AFF scam posts per day. This section is a good source of new scam instances.
 
-The producer crawls the section to build an index of available posts. It then crawls each post and scrapes the message content by matching tags in the HTML parse tree. This is illustrated in the algorithm in [FIGURE].
+The producer crawls the section to build an index of available posts. It then crawls each post and scrapes the message content by matching tags in the HTML parse tree. The algorithm is illustrated in figure Algorithm 1.
 
-% TODO: add caption
+\begin{algorithm}
+\caption{Crawler algorithm}
 \begin{algorithmic}
 \State $index\gets $ index of all posts
 \State $visited\gets $ index of crawled posts
@@ -40,6 +41,7 @@ The producer crawls the section to build an index of available posts. It then cr
 	\State $visited \gets post \cup visited$
 \EndFor
 \end{algorithmic}
+\end{algorithm}
 
 \subsection{Forwarded messages collector}
 The forwarded messages collector was a commonly requested feature in project meetings and is another example of a producer designed to gather new scam instances. Users can configure their email client to forward the contents of their spam folder to an email account monitored by this provider. The collector will then automatically fetch all messages, strip any personally identifiable information and deliver them to the agent for further processing. Depending on the outcome of the classification task, the agent may initiate a series of new conversation threads.
