@@ -15,11 +15,15 @@ Collector modules
 
 1) Opravi problemite s collectors / collection
 2) Do-opravi labels na vsichki figuri
-3) sloji histogramata. i.e. psevdo histogramata
-4) opravi abstrakta
 5) opravi arch overview, kudeto govorim gluposti
 6) opravi all the links
 7) sloji references
 8) proof read
 9) spell check.
 10) Fix the hierarchical chapter, as per Charles' suggestion
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.80]{pics/distribution_of_messages.png}
+\caption{Messages per thread, participating only.}
+\end{figure}

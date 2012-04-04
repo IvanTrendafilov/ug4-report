@@ -1,15 +1,13 @@
 \abstract{In this project we explore the feasibility of building a conversational agent to sustain email correspondence with advance fee fraud (AFF) spammers. AFF spam is a type of
 unsolicited email, in which the scammer attempts to extract large sums of money
-from a target using various social engineering techniques. Because these messages
-often resemble legitimate correspondence, they are often omitted by modern spam filters.
+from a target using various social engineering techniques. Because these messages resemble legitimate correspondence, they are often omitted by modern spam filters.
 
 We structure our prototype system in five major components -- collection, information extraction, classification, identity generation, response generation.
 These components are designed to fully automate the processing cycle of AFF messages -- from obtaining an AFF instance to sending a reply, and employ
 a relatively wide range of techniques. Some of these include crawlers, parsers, discriminative classifiers, pattern matching rules and hierarchical finite state machines,
-but we provide a better overview of how they fit together in [CHAPTER].
+but we provide a better overview of how they fit together in Chapter 3.
 
-In parallel, we introduce the 419 corpus -- a corpus of 32,000 labeled AFF messages spanning 22 categories [SECTION]. 
-We believe this corpus can be useful for further research into advance fee fraud, as well as to develop better statistical spam filters.
+In parallel, we introduce the 419 corpus -- a corpus of 32,000 labeled AFF messages spanning 22 categories (Section 6.2). We believe this corpus can be useful for further research into advance fee fraud, as well as in the development of better statistical spam filters.
 
-Lastly, we evaluate the performance of the prototype system over a 10-day operation period. At the end of the experiment, we observe a participation rate of 58\% and average thread length of 6.20 messages, compared with 70\% and 7.40 messages for human baseline performance. These results suggest that while the agent can successfully maintain conversations spanning multiple exchanges, it is not as convincing as human participants. Nevertheless, it is important to remember the main advantage of our approach lies in its scalability -- the agent can maintain a very large number of conversations concurrently, whilst human ability is very limited in that regard [SECTION].
+Lastly, we evaluate the performance of the prototype system over a 10-day operation period. At the end of the experiment, we observe a participation rate of 58\% and average thread length of 6.20 messages, compared with 70\% and 7.40 messages for human baseline performance. These results suggest that while the agent can successfully maintain conversations spanning multiple exchanges, it is not as convincing as human participants. Nevertheless, it is important to remember the main advantage of our approach lies in its scalability -- the agent can maintain a very large number of conversations concurrently, whilst human ability is very limited in that regard (Section 8.3).
 }
