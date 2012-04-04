@@ -2,18 +2,18 @@
 In this chapter we detail the implementation of the classification component. We start with a brief overview of our usage case in Section 6.1. In Section 6.2 we introduce the 419 corpus -- an extensive collection of advance fee fraud messages. Lastly, in Section 6.3 we develop two Maximum Entropy models for classifying AFF messages.
 
 \section{Overview}
-The classification component serves two purposes. First, it provides a Python wrapper interface to an instance of the Stanford Classifier [REF] -- a Java implementation of a Maximum Entropy classifier. Second, it provides two trained models to solve text categorization problems. The first model -- the scam variation classifier -- helps us place an incoming message in one of 22 recognized classes of advance fee fraud scams. The second model -- the PQ classifier -- is a binary classifier that recognizes instances of personal questions in the body of a message. Both classifiers are trained on a corpus of AFF messages we have constructed specifically for this project. Their outputs are used to generate relevant responses, as shown in [CHAPTER].
+The classification component serves two purposes. First, it provides a Python wrapper interface to an instance of the Stanford Classifier [REF] -- a Java implementation of a Maximum Entropy classifier. Second, it provides two trained models to solve text categorization problems. The first model, the scam variation classifier, helps us place an incoming message in one of 22 recognized classes of advance fee fraud scams. The second model, the PQ classifier, is a binary classifier that recognizes instances of personal questions in the body of a message. Both classifiers are trained on a corpus of AFF messages we have constructed specifically for this project. Their outputs are used to generate relevant responses, as shown in Section 7.4.
 
 \section{The 419 corpus}
-In this section we introduce the 419 corpus -- a collection of 32,000 advance fee fraud email messages in 22 classes. We have constructed this corpus from freely available data on antifraudintl.org over the course of a week using a crawler, a scraper and a set of preprocessing techniques. It takes up 134 MB of disk space uncompressed and the data span a period of 5 years -- between January 2007 and January 2012.  Each message contains the following information:
+In this section we introduce the 419 corpus -- a collection of 32,000 advance fee fraud email messages in 22 classes. We have constructed this corpus from freely available data on antifraudintl.org over the course of a week using a crawler, a scraper and a set of preprocessing techniques. It takes up 134 MB of disk space uncompressed and the data spans a period of 5 years -- between January 2007 and January 2012.  Each message contains the following information:
 \begin{itemize}
 	\item A minimal set of headers -- \emph{Subject}, \emph{From} and/or \emph{Reply-To} address.
 	\item An extended set of headers -- these vary, but may contain \emph{Return-Path}, \emph{Received}, \emph{Date}, \emph{X-Originating-IP}, etc.
 	\item A message body -- the contents of the email message
-	\item Scam class -- e.g. \emph{Lottery}, \emph{Romance}, etc. See table [TABLE].
+	\item Scam class -- e.g. \emph{Lottery}, \emph{Romance}, etc. See Table 6.1.
 \end{itemize}
 
-The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in [CHAPTER], we have discarded over 11,000 malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents 25.6\% of the original data. In addition, we have grouped similar categories together (e.g., \textit{Romance scam} and \textit{Russian romance scam}) and reduced the number of possible classes from 31 to 22. Because the data has been labeled by third parties -- the moderators and users of antifraudintl.org, we have randomly sampled 380 messages to measure the labeling error rate. We define this rate as the percentage of email messages assigned a wrong class over the total number of messages in the sample. With 95\% confidence, we estimate a 0.79\% labeling error rate in the data. Whilst this is not insignificant, given the total size of the corpus, it is unlikely that classification accuracy will be significantly degraded due to the error rate. 
+The original data has been preprocessed heavily to construct the corpus. Using the information extraction techniques in Chapter 5, we have discarded over 11,000 malformed messages -- i.e., messages that do not contain the minimal set of headers, a message body or are not emails. This represents 25.6\% of the original data. In addition, we have grouped similar categories together (e.g., \textit{Romance scam} and \textit{Russian romance scam}) and reduced the number of possible classes from 31 to 22. Because the data has been labeled by third parties -- the moderators and users of antifraudintl.org, we have randomly sampled 380 messages to measure the labeling error rate. We define this rate as the percentage of email messages assigned a wrong class over the total number of messages in the sample. With 95\% confidence, we estimate a 0.79\% labeling error rate in the data. Whilst this is not insignificant, given the total size of the corpus, it is unlikely that classification accuracy will be significantly degraded due to mislabeled data points. 
 
 
 \begin{table}
@@ -50,7 +50,8 @@ Mystery shopper & 389 & 133,377 \\ \hline
 \end{table} 
 
 \section{Methodology}
-In this section we briefly describe the maximum entropy model. We then outline our feature selection and methodology for training the classifiers.
+In this section we briefly describe the Maximum Entropy model. We then outline our feature selection and methodology for training the classifiers.
+
 \subsection{Maximum Entropy model}
 The Maximum Entropy model is a statistical classification model which seeks to optimize for the probability distribution with the maximum entropy, subject to the constraints of the training set . It is a an exponential model of the following form:
 \begin{equation}
@@ -61,7 +62,7 @@ where $p(a|b)$ denotes the probability of predicting $a$, given $b$, $\alpha_{j}
 By combining evidence into a bag of features, the Maximum Entropy model allows us to represent knowledge about a problem in the form of contextual predicates. Also, in contrast to Na\"{\i}ve Bayes, another commonly used classifier for text categorization [REFERENCE Mitchell, 1997)], the Maximum Entropy model does not assume conditional independence between observed evidence. This allows us to incorporate overlapping features, such as whole words and corresponding n-grams, and typically achieve better probability estimates than possible with Na\"{\i}ve Bayes. [REF]
 
 \subsection{Feature selection}
-Optimal feature selection for supervised learning problems is a challenging task. Exhaustive enumeration of all feature sets is computationally infeasible, so popular approaches often rely on greedy algorithms such as forward selection and backwards elimination. Nevertheless, building the best possible text categorization model is not the main goal of this project, so we have opted to use n-gram based features, which have shown satisfactory performance in the literature [REF][REF]. The tables [FIGURE], [FIGURE] illustrate the feature selection for the scam variation classifier and the PQ classifier, respectively.
+Optimal feature selection for supervised learning problems is a challenging task. Exhaustive enumeration of all feature sets is computationally infeasible, so popular approaches often rely on greedy algorithms such as forward selection and backwards elimination. Nevertheless, building the best possible text categorization model is not the main goal of this project, so we have opted to use n-gram based features, which have shown satisfactory performance in the literature [REF][REF]. Table 6.2 illustrates feature selection for the scam variation classifier and the PQ classifier, respectively.
 
 \begin{table}[h]
   \centering
@@ -81,7 +82,6 @@ Optimal feature selection for supervised learning problems is a challenging task
 \end{table}
 
 \subsection{Training the classifiers}
-
 We have trained both classifiers on data from the 419 corpus.  The scam variation classifier is trained on a 80\% random sample of the corpus, obtained using the following procedure: $\forall k_{1,2...,22} \in S$, $T=$\{$80\% \times k_{1}, 80\% \times k_{2},..., 80\% \times k_{22}$\}, where $k_{n}$ represents each class, $S$ is the set of messages in the corpus and $T$ is training set. The PQ classifier is trained using a similar procedure, except our training and validation sets are smaller -- 500 manually labelled messages.
 
-In order to estimate the performance of our predictive models, we have performed cross-validation. The methodology and results are presented in [CHAPTER, SECTION].
+In order to estimate the performance of our predictive models, we have performed cross-validation. The methodology and results are presented in Section 8.2.

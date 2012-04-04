@@ -1,5 +1,5 @@
 \chapter{Evaluation}
-T\his chapter contains the evaluation of our prototype system. In [SECTION .1] we define the terminology we use in our results. [SECTION 1.2] focuses on intermediate results, i.e., results of various probabilistic tasks. Finally, we provide a discussion on the meaning of these results.
+This chapter contains the evaluation of our prototype system. In Section 8.1 we define the terminology we use to present our results. Section 8.2 focuses on intermediate results, i.e., measuring the performance of various probabilistic tasks. In Section 8.2, we present the final results of our project. Lastly, we interpret the results and provide our final thoughts on advance fee fraud.
 
 \section{Terminology}
 Throughout this chapter, for the sake of clarity and brevity, we use the following terminology to present our results.
@@ -10,14 +10,14 @@ Throughout this chapter, for the sake of clarity and brevity, we use the followi
 \item[Thread] Each thread is defined as a logical unit of all messages related to a single instance of a scam. Threads are proportional and contain messages from both the agent and the scammer.
 \item[Bounce rate] This measure is defined as the ratio of all threads containing undeliverable messages (due to deleted email boxes, exceeded quota, etc.) over the total number of threads in the sample.
 \item[Participation rate] This measure is defined as the ratio of threads that contain at least one reply from a scammer over the total number of threads in the sample (excluding bounced threads).
-\item[Other abbreviations] For brevity, in some tables we use the abbreviations \textit{TP, FN, FP, TN} to mean, respectively, \textit{True Positive, False Negative, False Positive, True Negative}.
+\item[Other abbreviations] To save space, in some tables we use the abbreviations \textit{TP, FN, FP, TN} to mean, respectively, \textit{True Positive, False Negative, False Positive, True Negative}.
 \end{description}
 
 \section{Intermediate results}
 The intermediate results presented in this section measure the performance of probabilistic tasks in the classification and information extraction component.
 
 \subsection{Scam variation classifier}
-The scam variation classifier is trained on a classical 80:20 split of data from the 419 corpus. Our model achieves Macro F$_{1} = 0.81177$ and Micro F$_{1}= 0.77134$ on the $5,996$ data points in the validation set. A breakdown of the results is shown in [FIGURE].
+The scam variation classifier is trained on a classical 80:20 split of data from the 419 corpus. Our model achieves Macro F$_{1} = 0.81177$ and Micro F$_{1}= 0.77134$ on the 5,996 data points in the validation set. A breakdown of the results is shown in Table 8.1.
 
 \begin{table}[h]
   \centering
@@ -55,7 +55,7 @@ Mystery shopper & 55 & 4 & 2 & 5905 & 0.965 & 0.932 & 0.948 \\ \hline
 \end{table}
 
 \subsection{PQ classifier}
-We evaluate the performance of the personal questions (PQ) classifier using 2-fold cross-validation on a set of 500 email messages. The averaged results are shown in [TABLE]. Note that since this is a binary classifier, the first two table rows are reciprocal.
+We evaluate the performance of the personal questions (PQ) classifier using 2-fold cross-validation on a set of 500 email messages. The averaged results are shown in Table 8.2. Note that since this is a binary classifier, the first two table rows are reciprocal.
 \begin{table}[h]
   \centering
 \scalebox{0.85}{
@@ -71,7 +71,7 @@ No PQ & 121 & 7 & 26 & 96 & 0.823 & 0.945 & 0.880 \\ \hline
 \caption{PQ classifier}
 \end{table}
 \subsection{Named-entity recognition classifier}
-As described in [SECTION], we use a CRF classifier with a pre-trained model on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this section, we measure the model's performance on a validation set of 50 manually labeled messages (18655 words) from the 419 corpus. Whilst the sample is comparatively small, our time is limited and the model is already reported to achieve F$_{1} = 90.36$ for the \emph{Persons} class on the CoNNL 2003 dataset (see [SECTION]). The results are summarized in [TABLE]. Note that we do not include the \emph{Locations} and \emph{Organizations} classes, as they are not relevant to our use case.
+As described in Section 5.2, we use a CRF classifier with a pre-trained model on the CoNLL 2003, MUC-6, MUC-7 and ACE named entity corpora. In this section, we measure the model's performance on a validation set of 50 manually labeled messages (18655 words) from the 419 corpus. Whilst the sample is comparatively small, our time is limited and the model is already reported to achieve F$_{1} = 90.36$ for the \emph{Persons} class on the CoNNL 2003 dataset (5.2.2). The results are summarized in Table 8.3. Note that we do not include the \emph{Locations} and \emph{Organizations} classes, as they are not relevant to our use case.
 \begin{table}[h]
   \centering
 \scalebox{0.85}{
@@ -80,14 +80,16 @@ As described in [SECTION], we use a CRF classifier with a pre-trained model on t
 \textbf{Class} & \textbf{TP} & \textbf{FN} & \textbf{FP} & \textbf{TN} & \textbf{Precision} & \textbf{Recall} & \textbf{F$_{1}$} \\ \hline
 Persons & 354 & 85 & 31 & 18185 & 0.919 & 0.806 & 0.859 \\ \hline
 \end{tabular}
-\caption{Named-entity recognition CRF classifier}
 }
+\caption{Named-entity recognition using Stanford NER 3 class model}
 \end{table}
 
+\clearpage
 \section{Conversation results}
-In this section we present results of the conversations our system has maintained with scammers. We begin by reviewing our methodology. In Sections [SECTION][SECTION], we describe a number of interesting statistics.
+In this section we present results of the conversations our system has maintained with scammers. We begin by reviewing our methodology. Then, we outline a number of interesting statistics.
+
 \subsection{Methodology}
-To measure the performance of our prototype system, we deployed it on a virtual private server ([SECTION]) and let it run continuously from 19 March to 28 March. Over the 10-day period, the system gathered and processed 348 scam instances in 19 classes. Of the 348 instances, 45 were in the set of currently supported classes -- \textit{Lottery, Orphans, Mystery shopper}. We present detailed statistics from these conversation threads in [SECTION]. To put our results in context, we provide several baseline measures, depending on the purpose of the experiment. For example, to measure the bounce rate of threads, we draw random samples from the remaining set of scam instances, in order to compare it with the sample obtained by the system.
+To measure the performance of our prototype system, we deployed it on a virtual private server (Section 3.3) and let it run continuously from 19 March to 28 March. Over the 10-day period, the system gathered and processed 348 scam instances in 19 classes. Of the 348 instances, 45 were in the set of currently supported classes -- \textit{Lottery, Orphans, Mystery shopper}. We present detailed statistics from these conversation threads in subsections 8.2.2--8.2.5 . To put our results in context, we provide several baseline measures, depending on the purpose of the experiment. For example, to measure the bounce rate of threads, we draw random samples from the remaining set of scam instances and compare it with the sample obtained by the system.
 
 \begin{table}[h]
   \centering
@@ -95,7 +97,7 @@ To measure the performance of our prototype system, we deployed it on a virtual 
 %\begin{tabular}{|l c|}
 \begin{tabular}{l c}
   \hline
-  \multicolumn{2}{c}{Experiment overview} \\
+  \multicolumn{2}{c}{Parameters} \\
   \hline
   Duration & 10 days \\ %\hline
   Scam instances & 348 \\ %\hline
@@ -103,13 +105,13 @@ To measure the performance of our prototype system, we deployed it on a virtual 
   Threads & 45 \\ 
   \hline
 \end{tabular}
-\caption{Experiment overview}
 }
+\caption{Experiment overview}
 \end{table}
 
 % Consider merge, once you figure out how to do figures.
 \subsection{Bounce rate}
-We compare the bounce rate of our system with a baseline metric obtained by replying with a blank email to 100 messages in the set of scam instances. The results are summarized in [TABLE] and indicate that over 20\% of advance fee fraud scammers' accounts are quickly detected and removed by email providers.
+We compare the bounce rate of our system with a baseline metric obtained by replying with a blank email to 100 messages in the set of scam instances. The results are summarized in Table 8.5 and indicate that over 20\% of advance fee fraud scammers' accounts are quickly detected and removed by email providers.
 
 \begin{table}[h]
   \centering
@@ -127,7 +129,7 @@ We compare the bounce rate of our system with a baseline metric obtained by repl
 \end{table}
 
 \subsection{Participation rate}
-We compare the participation rate [SECTION] achieved by our system with two baseline metrics. The first metric measures the participation rate for human respondents with a random sample of 20 threads. Whilst the sample is small, our time is limited and composing replies to scammers is very time consuming. A second metric measures the participation rate for a ``disabled'' system, i.e., a system which simply replies with ``\textit{I am interested, please send me more information}'', for the full sample of 45 threads.  The results are presented in [TABLE] and indicate that more sophisticated responses yield better participation rates, yet -- interestingly -- some scammers also respond to completely depersonalized emails.
+We compare the participation rate (Section 8.1) achieved by our system with two baseline metrics. The first metric measures the participation rate for human respondents with a random sample of 20 threads. Whilst the sample is small, our time is limited and composing replies to scammers is very time consuming. A second metric measures the participation rate for a ``disabled'' system, i.e., a system which simply replies with ``\textit{I am interested, please send me more information}'', for the full sample of 45 threads.  The results are presented in Table 8.6 and indicate that more sophisticated responses yield better participation rates, yet -- interestingly -- some scammers also respond to completely depersonalized emails.
 
 \begin{table}[h]
   \centering
@@ -146,7 +148,7 @@ We compare the participation rate [SECTION] achieved by our system with two base
 \end{table}
  
 \subsection{Average thread length}
-We introduce and compare several measures of average thread length, as outlined in [TABLE].  The ``absolute'' metric includes all threads, without taking into account the bounce rate of the sample. In contrast, the ``existing only'' metric excludes threads with undeliverable messages. This metric is more representative of the overall performance of our system. Lastly, the ``participating only'' metric excludes threads that lack a response from a scammer. This metric can be thought of as a proxy measure of how engaging our responses are. We also provide a baseline human performance for comparison, as described in our experiment in [SECTION, Background]. It is important to note that the baseline should be used with care, as it stems from a different sample.
+We introduce and compare several measures of average thread length, as outlined in Table 8.6.  The ``absolute'' metric includes all threads, without taking into account the bounce rate of the sample. In contrast, the ``existing only'' metric excludes threads with undeliverable messages. This metric is more representative of the overall performance of our system. Lastly, the ``participating only'' metric excludes threads that lack a response from a scammer. This metric can be thought of as a proxy measure of how engaging our responses are. We also provide a baseline human performance for comparison, as described in our experiment in Section 2.1. It is important to note that the baseline should be used with care, as it stems from a different sample.
 
 \begin{table}[h]
   \centering
@@ -166,7 +168,7 @@ We introduce and compare several measures of average thread length, as outlined 
 \end{table}
 
 \subsection{Distribution by class}
-[Figure] shows the distribution of incoming scam instances over the 10-day period. The five most common classes are: \textit{Loans, Romance, Next of kin, Lottery, Business}.
+Table 8.8 shows the distribution of incoming scam instances over the 10-day period and the average number of words per class. The five most common classes are: \textit{Loans, Romance, Next of kin, Lottery, Business}.
 
 \begin{table}[h]
   \centering
@@ -204,6 +206,6 @@ Mystery shopper & 1 & 875.00 \\ \hline
 
 \section{Discussion}
 In this chapter we presented a number of interesting statistics which capture the performance of our prototype system. Our results demonstrate it is possible to build a fully automated system
-to maintain conversations with advance fee fraud scammers. Furthermore, [table participation] clearly shows that more sophisticated strategies yield better response rates. Nevertheless, [figure] and [figure] also indicate that human performance remains superior for these natural language tasks.
+to maintain conversations with advance fee fraud scammers. Furthermore, Table 8.6 clearly shows that more sophisticated strategies yield better response rates. Nevertheless, tables 8.6 and 8.7 also indicate that human performance remains superior for these natural language tasks.
 
 It is important to remember that the main benefit of an automated system lies in its scalability. Our prototype system requires approximately 10 seconds to compose and transmit a reply. Assuming a constant stream of incoming messages, a single instance can handle up to 8,640 AFF messages a day -- far more than even the most dedicated scambaiter. Nevertheless, the question ``Can this solution scale in the real world?'' is a complicated one. It is not unreasonable to expect that scammers will eventually adapt and develop ways to discriminate between automatically generated replies and human replies. For example, the inclusion of a simple challenge-response mechanism may be one way of deterring automated responses -- e.g., ``Are you human?'' In turn, it is also possible to add new pattern matching rules to system to answer these questions. Ultimately, this is a technological arms race -- the success of our system is bounded by the sophistication of our natural language model and our ability to adapt it to new conditions. In spite of this, we believe a real world deployment of the proposed system has the potential to change the dynamics of advance fee fraud by discouraging some scammers and forcing others to innovate.
