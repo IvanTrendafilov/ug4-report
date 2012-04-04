@@ -8,19 +8,19 @@ The goal of the information extraction component is to obtain useful information
 In order to extract the information we are interested in, we apply a series of transformations to each incoming message. These steps are summarized in the algorithm below:
 \begin{enumerate}
 \item remove HTML % 1
-\vspace{-5mm}
+%\vspace{-5mm}
 \item remove any quoted messages % 2 
-\vspace{-5mm}
+%\vspace{-5mm}
 \item cleanse headers % 3
-\vspace{-5mm}
+%\vspace{-5mm}
 \item extract \textit{From, Reply-To, Subject, To} headers % 4
-\vspace{-5mm}
+%\vspace{-5mm}
 \item extract message body % 5
-\vspace{-5mm}
+%\vspace{-5mm}
 \item perform NER on the message body % 6
-\vspace{-5mm}
+%\vspace{-5mm}
 \item extract all emails from the message body % 7
-\vspace{-5mm}
+%\vspace{-5mm}
 \item compute any relationships between emails and named-entities %8 
 \end{enumerate}
 
